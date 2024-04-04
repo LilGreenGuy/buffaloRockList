@@ -51,3 +51,7 @@ const celsius =
     sizes: ['12oz', '16oz', '4pk', '12pk'],
     types: ['Essentials', 'Live Fit']
 }
+
+function createBrands(...objects) {
+
+}
