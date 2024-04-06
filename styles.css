@@ -4,4 +4,51 @@
 
 body {
     background: #fff;
+    width: 100%;
+}
+
+#logo {
+    width: 150px;
+    height: auto;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#header h1 {
+    text-align: center;
+}
+
+.shell {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.banner {
+    display: flex;
+}
+
+.beverageInputs {
+    display: flex;
+    justify-content: center;
+    background: #f6f6f6;
+    height: 5rem;
+}
+
+.inputs {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.inputFields {
+    height: 2rem;
+    /* width: 5rem; */
 }

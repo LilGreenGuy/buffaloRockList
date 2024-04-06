@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +8,42 @@
     <link rel="stylesheet" href="./styles.css">
     <title>Buffalo Rock List App</title>
 </head>
+
 <body>
     <header id="header">
-        <div class="logo">
-<img src="./img/buffalo-rock-logo.svg" alt="Buffalo Rock Logo" id="logo">
+        <div class="shell">
+            <div class="logo">
+                <img src="./img/buffalo-rock-logo.svg" alt="Buffalo Rock Logo" id="logo">
+            </div>
+            <div class="banner">
+                <h1>Merchandizing Fill List</h1>
+            </div>
         </div>
     </header>
-    <label for="brand-select">Brand:</label>
 
-    <select id="brand-select">
-        <option value="">-Please choose a drink brand-</option>
-        <option></option>
-    </select>
-
+    <section class="beverageInputs">
+        <div class="inputs">
+            <select id="brandSelect" class="inputFields">
+                <option value="">Beverage Brand:</option>
+                <option></option>
+            </select>
+            <select name="" id="flavor" class="inputFields">
+                <option value="">Flavor:</option>
+            </select>
+            <select id="sizeSelect" class="inputFields">
+                <option value="">Package Size:</option>
+            </select>
+            <select id="variety" class="inputFields">
+                <option value="">Variety:</option>
+            </select>
+            <input type="number" id="caseAmount" class="inputFields" placeholder="Cases">
+            <input type="number" id="unitAmount" class="inputFields" placeholder="Units">
+        </div>
+    </section>
     <section id="list">
-        <input type="number">
+
     </section>
     <footer id="footer"></footer>
 </body>
+
 </html>
