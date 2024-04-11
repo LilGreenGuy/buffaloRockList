@@ -3,6 +3,7 @@
     max-width: 100%;
     overflow-x: hidden;
     margin: 0;
+    padding: 0;
 }
 
 body {
@@ -77,10 +78,12 @@ h2 {
 }
 
 .deleteThis {
-    content: '\2716';
     border-radius: 100%;
     width: 25px;
     height: 25px;
+    font-size: 1.2rem;
+    text-align: center;
+    color: red;
 }
 
 .todo {
