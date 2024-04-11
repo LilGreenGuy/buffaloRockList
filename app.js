@@ -1,8 +1,8 @@
 const pepsiCo =
 {
     brand: ['Aquafina', 'Gatorade', 'Lifewater', 'Lipton', 'Mountain Dew', 'Mug', 'Pepsi', 'Propel', 'Rockstar', 'SoBe', 'Starry'],
-    flavor: ['None', 'Baja', 'Code Red', 'Fruit Splash', 'Livewire', 'Voltage', 'Wild Cherry',],
     variety: ['Original', 'Diet', 'Zero'],
+    flavor: ['None', 'Baja', 'Caffeine Free', 'Code Red', 'Fruit Splash', 'Livewire', 'Voltage', 'Wild Cherry',],
     size: ['20oz', '2LT', '6pk-10oz', '6pk-16oz', '8pk', '10pk', '12pk', '18pk', '24pk', '32pk']
 }
 // {
@@ -23,8 +23,8 @@ const keurigDrPepper =
 {
     brand: ['AShoc', 'Sundrop', 'Dr. Pepper', '7up', 'A&W', 'Canada Dry', 'Crush', 'Bai', 'Deja Blue', 'Hawaiian Punch', 'RC Cola', 'Diet Rite',
         'Schweppes', 'Snapple', 'Squirt', 'Vernors'],
-    flavor: ['Cream Soda', 'Orange', 'Strawberry', 'Strawberries and Cream'],
     variety: [],
+    flavor: ['Cream Soda', 'Orange', 'Strawberry', 'Strawberries and Cream'],
     size: []
 }
 
@@ -32,8 +32,8 @@ const keurigDrPepper =
 const buffaloRock =
 {
     brand: ['Buffalo Rock Ginger Ale', 'Dr Wham', 'Grapico', 'Sunfresh'],
-    flavor: [],
     variety: [],
+    flavor: [],
     size: []
 }
 
@@ -41,11 +41,11 @@ const buffaloRock =
 const celsius =
 {
     brand: ['Celsius'],
+    variety: ['Essentials', 'Live Fit'],
     flavor: ['Arctic Vibe', 'Astro Vibe', 'Blue Crush', 'Blue Razz Lemonade', 'Cherry Limeade', 'Cosmic Vibe', 'Cola', 'Dragonberry', 'Fantasy Vibe',
         'Fruit Burst', 'Fuji Apple Pear', 'Galaxy Vibe', 'Grape Rush', 'Green Apple Cherry', 'Kiwi Guava', 'Lemon Lime', 'Mango Passionfruit', 'Mango Tango',
         'Oasis Vibe', 'Orange', 'Orangecicle', 'Peach Mango', 'Peach Vibe', 'Raspberry Acai', 'Raspberry Peach', 'Strawberry Guava', 'Strawberry Lemonade',
         'Tropical Vibe', 'Watermelon'],
-    variety: ['Essentials', 'Live Fit'],
     size: ['12oz', '16oz', '4pk', '12pk']
 }
 
@@ -96,10 +96,23 @@ function addItem() {
     const listedItem = document.createElement('p');
     listedItem.classList.add('listItem');
     fillItem.appendChild(listedItem);
-    if (brandField.value === '') {
+    if (brandField.value === '' || flavorField.value === '' || varietyField.value === '' || sizeField.value === '') {
         const parent = listedItem.parentNode;
         return parent.remove();
-    } else if ((cases.value === '0' || cases.value === '') && (units.value === '0' || units.value === '')) {
+    }
+    if (flavorField.value === 'None') {
+        if ((cases.value === '0' || cases.value === '') && (units.value === '0' || units.value === '')) {
+            const parent = listedItem.parentNode;
+            return parent.remove();
+        } else if (cases.value === '0' || cases.value == '') {
+            listedItem.innerText = `${brandField.value} ${varietyField.value} ${sizeField.value} needs ${units.value} units`
+        } else if (units.value === '0' || units.value === '') {
+            listedItem.innerText = `${brandField.value} ${varietyField.value} ${sizeField.value} needs ${cases.value} cases`
+        } else if (cases.value > 0 && units.value > 0) {
+            listedItem.innerText = `${brandField.value} ${varietyField.value} ${sizeField.value} needs ${cases.value} cases and ${units.value} units`
+        }
+    } else if (flavorField.value != 'None') {
+        if ((cases.value === '0' || cases.value === '') && (units.value === '0' || units.value === '')) {
             const parent = listedItem.parentNode;
             return parent.remove();
         } else if (cases.value === '0' || cases.value == '') {
@@ -109,16 +122,14 @@ function addItem() {
         } else if (cases.value > 0 && units.value > 0) {
             listedItem.innerText = `${brandField.value} ${flavorField.value} ${varietyField.value} ${sizeField.value} needs ${cases.value} cases and ${units.value} units`
         }
-    
+    }
 
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('deleteThis');
     deleteBtn.innerText = 'X'
-    deleteBtn.style.color = 'red'
     fillItem.appendChild(deleteBtn);
 
     function deleteItem() {
-
         const parent = deleteBtn.parentNode;
         parent.remove();
     }
