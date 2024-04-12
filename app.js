@@ -116,11 +116,11 @@ function addItem() {
             const parent = listedItem.parentNode;
             return parent.remove();
         } else if (cases.value === '0' || cases.value == '') {
-            listedItem.innerText = `${brandField.value} ${flavorField.value} ${varietyField.value} ${sizeField.value} needs ${units.value} units`
+            listedItem.innerHTML = `<b>${brandField.value} ${varietyField.value} ${flavorField.value} ${sizeField.value}</b> needs ${units.value} units`
         } else if (units.value === '0' || units.value === '') {
-            listedItem.innerText = `${brandField.value} ${flavorField.value} ${varietyField.value} ${sizeField.value} needs ${cases.value} cases`
+            listedItem.innerText = `${brandField.value} ${varietyField.value} ${flavorField.value} ${sizeField.value} needs ${cases.value} cases`
         } else if (cases.value > 0 && units.value > 0) {
-            listedItem.innerText = `${brandField.value} ${flavorField.value} ${varietyField.value} ${sizeField.value} needs ${cases.value} cases and ${units.value} units`
+            listedItem.innerText = `${brandField.value} ${varietyField.value} ${flavorField.value} ${sizeField.value} needs ${cases.value} cases and ${units.value} units`
         }
     }
 

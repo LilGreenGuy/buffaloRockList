@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     max-width: 100%;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     margin: 0;
     padding: 0;
 }
@@ -97,6 +97,11 @@ h2 {
     margin: 20px;
 }
 
+h1,
+h2 {
+    color: #004b93;
+}
+
 .shell {
     display: flex;
     text-align: center;
@@ -112,6 +117,7 @@ h2 {
 
 .beverageInputs {
     background: #f6f6f6;
+    padding: 10px 0;
 }
 
 .inputs {
@@ -130,15 +136,30 @@ h2 {
 
 .inputFields {
     height: 2rem;
+    border-radius: 0.25rem;
+    border: 1px solid darkgrey;
 }
 
 .numberInput {
-    width: 9em;
+    width: 100%;
 }
 
 .btn {
-    border-radius: .5rem;
+    appearance: none;
+    background: #004b93;
+    border: 0;
+    border-radius: .25rem;
+    box-shadow: 3.5px 5px 0 0 rgba(0, 23, 44, .25);
+    color: #fff;
+    font-weight: 700;
     height: auto;
+    letter-spacing: .046px;
+    transition: all .4s;
+}
+
+.btn:hover,
+.btn:active {
+    box-shadow: none;
 }
 
 .deleteThis {
@@ -161,7 +182,6 @@ h2 {
     background: #f6f6f6;
 }
 
-.deleteThis,
-.btn {
+.deleteThis {
     border: 1px solid rgb(37, 37, 161);
 }
