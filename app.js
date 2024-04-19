@@ -1,8 +1,8 @@
 const pepsiCo = [
     {
         brand: "Aquafina",
-        variety: "Original",
-        flavor: "None",
+        variety: ["Original"],
+        flavor: ["None"],
         size: ["20oz", "8pk", "24pk", "32pk"]
     },
     {
@@ -14,7 +14,8 @@ const pepsiCo = [
     {
         brand: "Lipton",
         variety: ["Original", "Diet"],
-        flavor: ["Georiga Peach", "Mixed Berry", "Lemon", "White Raspberry"]
+        flavor: ["Georiga Peach", "Mixed Berry", "Lemon", "White Raspberry"],
+        size: ["20oz", "2LT", "12pk"]
     },
     {
         brand: "Mountain Dew",
@@ -25,7 +26,7 @@ const pepsiCo = [
     {
         brand: "Mug",
         variety: ["Original", "Zero"],
-        flavor: "None",
+        flavor: ["None"],
         size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "10pk", "12pk"]
     },
     {
@@ -36,7 +37,7 @@ const pepsiCo = [
     },
     {
         brand: "Propel",
-        variety: "Original",
+        variety: ["Original"],
         flavor: ["Grape", "Lemon", "Strawberry Kiwi"],
         size: ["20oz", "1.25LT", "6pk", "12pk"]
     },
@@ -49,7 +50,7 @@ const pepsiCo = [
     {
         brand: "Starry",
         variety: ["Original", "Zero"],
-        flavor: "None",
+        flavor: ["None"],
         size: ["20oz", "6pk-10oz", "6pk-16oz", "10pk", "12pk"]
     }
 ]
@@ -57,7 +58,7 @@ const pepsiCo = [
 const keurigDrPepper = [
     {
         brand: "Ashoc",
-        variety: "Original",
+        variety: ["Original"],
         flavor: ["Berry Lemonade"],
         size: ["12oz", "16oz"]
     },
@@ -75,14 +76,14 @@ const keurigDrPepper = [
     },
     {
         brand: "Bai",
-        variety: "Original",
-        flavor: ["Molokai Coconut"],
+        variety: ["Original"],
+        flavor: ["Brasilia Blueberry", "Kula Watermelon", "Molokai Coconut", "Zambia Bing Cherry"],
         size: ["16oz", "4pk"]
     },
     {
         brand: "Big Red",
-        variety: "Original",
-        flavor: "None",
+        variety: ["Original"],
+        flavor: ["None"],
         size: ["20oz", "2LT"]
     },
     {
@@ -93,39 +94,70 @@ const keurigDrPepper = [
     },
     {
         brand: "Crush",
-        variety: "Original",
+        variety: ["Original"],
         flavor: ["Orange", "Grape", "Strawberry"],
         size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "10pk", "12pk"]
     },
     {
-        brand: ["Sundrop", "Dr. Pepper", "Deja Blue", "Hawaiian Punch", "RC Cola", "Diet Rite",
-            "Schweppes", "Snapple", "Squirt", "Vernors"],
-        variety: [],
-        flavor: ["Cream Soda", "Orange", "Strawberry", "Strawberries and Cream"],
-        size: []
-    }]
+        brand: "Deja Blue",
+        variety: ["Original"],
+        flavor: ["None"],
+        size: ["20oz"]
+    },
+    {
+        brand: "Diet Rite",
+        variety: ["Original"],
+        flavor: ["None"],
+        size: ["12pk"]
+    },
+    {
+        brand: "Dr. Pepper",
+        variety: ["Original", "Diet", "Zero"],
+        flavor: ["None", "Cherry", "Coconut", "Cream Soda", "Strawberries and Cream"],
+        size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "8pk", "10pk", "12pk", "24pk"],
+    },
+    {
+        brand: "Hawaiian Punch",
+        variety: ["Original"],
+        flavor: ["None"],
+        size: ["20oz", "2LT", "6pk-16oz", "12pk"]
+    }
+    // {
+    //     brand: ["Sundrop", , "Hawaiian Punch", "RC Cola",
+    //         "Schweppes", "Snapple", "Squirt", "Vernors"],
+    //     variety: [],
+    //     flavor: ["Cream Soda", "Orange", "Strawberry", "Strawberries and Cream"],
+    //     size: []
+    // }
+];
 
 
 const buffaloRock = [
     {
-        brand: ["Buffalo Rock Ginger Ale"],
+        brand: "Buffalo Rock Ginger Ale",
         variety: ["Original", "Diet"],
-        flavor: "None",
-        size: "12pk"
+        flavor: ["None"],
+        size: ["12pk"]
     },
     {
-        brand: ["Grapico"],
-        variety: ["Original, Diet"],
-        flavor: "None",
+        brand: "Grapico",
+        variety: ["Original", "Diet"],
+        flavor: ["None"],
         size: ["20oz", "2LT", "12pk"]
     },
     {
-        brand: ["Sunfresh"],
+        brand: "Sundrop",
+        variety: ["Original", "Zero"],
+        flavor: ["None"],
+        size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "12pk"]
+    },
+    {
+        brand: "Sunfresh",
         variety: ["Original, Diet"],
-        flavor: "None",
+        flavor: ["None"],
         size: ["20oz", "2LT", "12pk"]
     }
-]
+];
 
 
 const celsius = [
@@ -140,11 +172,11 @@ const celsius = [
     },
     {
         brand: "Celsius Essentials",
-        variety: "Original Variety",
+        variety: ["Original", "Variety"],
         flavor: ["Blue Crush", "Cherry Limeade", "Dragonberry", "Fruit Burst", "Mango Tango"],
-        size: ["16oz, 12pk"]
+        size: ["16oz", "12pk"]
     }
-]
+];
 
 
 const companyField = document.querySelector("#parentCompany");
@@ -156,29 +188,32 @@ const submitBtn = document.querySelector('.submit')
 const listTable = document.querySelector('.table');
 const cases = document.getElementById('case');
 const units = document.getElementById('unit');
-const resetBtn = document.querySelector('.reset')
+const resetBtn = document.querySelector('.reset');
 
 submitBtn.onclick = () => addItem();
 resetBtn.onclick = () => resetList();
-companyField.onchange = () => createBrands(companyField.value)
+companyField.onchange = () => createBrands(companyField.value);
+brandField.onchange = () => createSubFields(companyField.value);
 
 function createBrands(value) {
-    let brandFieldChildren = brandField.children.length
+    let brandFieldChildren = brandField.children.length;
     for (let i = 1; i < brandFieldChildren; ++i) {
-        brandField.removeChild(brandField.lastChild)
+        brandField.removeChild(brandField.lastChild);
     }
 
     if (value === "Buffalo Rock") {
-        createFields(buffaloRock);
+        createBrandFields(buffaloRock);
     } else if (value === "Celsius") {
-        createFields(celsius);
+        createBrandFields(celsius);
+    } else if (value === "Keurig Dr. Pepper") {
+        createBrandFields(keurigDrPepper);
     } else if (value === "Pepsi Co") {
-        createFields(pepsiCo);
+        createBrandFields(pepsiCo);
     }
 
 }
 
-function createFields(objects) {
+function createBrandFields(objects) {
 
     for (let obj of objects) {
         const brandOption = document.createElement('option');
@@ -187,17 +222,73 @@ function createFields(objects) {
     }
 }
 
+function createSubFields(value) {
+
+    if (value === "Buffalo Rock") {
+        createFields(buffaloRock);
+    } else if (value === "Celsius") {
+        createFields(celsius);
+    } else if (value === "Keurig Dr. Pepper") {
+        createFields(keurigDrPepper);
+    } else if (value === "Pepsi Co") {
+        createFields(pepsiCo);
+    }
+    function createFields(objects) {
+
+        let varietyFieldChildren = varietyField.children.length
+        let flavorFieldChildren = flavorField.children.length
+        let sizeFieldChildren = sizeField.children.length;
+        for (let i = 1; i < varietyFieldChildren; ++i) {
+            varietyField.removeChild(varietyField.lastChild);
+        }
+        for (let i = 1; i < flavorFieldChildren; ++i) {
+            flavorField.removeChild(flavorField.lastChild);
+        }
+        for (let i = 1; i < sizeFieldChildren; ++i) {
+            sizeField.removeChild(sizeField.lastChild);
+        }
+
+        for (i = 0; i < objects.length; i++) {
+            if (brandField.value === objects[i].brand) {
+                let brandSelected = objects[i];
+                for (j = 0; j < brandSelected.variety.length; j++) {
+                    const varietyOption = document.createElement('option');
+                    varietyOption.innerText = `${brandSelected.variety[j]}`;
+                    varietyField.appendChild(varietyOption);
+                }
+                for (j = 0; j < brandSelected.flavor.length; j++) {
+                    const flavorOption = document.createElement('option');
+                    flavorOption.innerText = `${brandSelected.flavor[j]}`;
+                    flavorField.appendChild(flavorOption);
+                }
+                for (j = 0; j < brandSelected.size.length; j++) {
+                    const sizeOption = document.createElement('option');
+                    sizeOption.innerText = `${brandSelected.size[j]}`;
+                    sizeField.appendChild(sizeOption);
+                }
+            }
+        }
+    }
+    console.log(brandField.value)
+    // for (let i = 0; i < brandField.length; i++) {
+    //     if()
+    //     const flavorOption = document.createElement('option');
+    //     flavorOption.innerText = `${objects.flavor}`
+    //     flavorField.appendChild(flavorOption);
+    // }
+}
+
 // function createBrands(objects) {
 //     for (i = 0; i < objects.flavor.length; i++) {
 //         const flavorOption = document.createElement('option');
 //         flavorOption.innerText = `${objects.flavor[i]}`
 //         flavorField.appendChild(flavorOption);
-//     }
-//     for (i = 0; i < objects.size.length; i++) {
-//         const sizeOption = document.createElement('option');
-//         sizeOption.innerText = `${objects.size[i]}`
-//         sizeField.appendChild(sizeOption);
-//     }
+// }
+// for (i = 0; i < objects.size.length; i++) {
+//     const sizeOption = document.createElement('option');
+//     sizeOption.innerText = `${objects.size[i]}`
+//     sizeField.appendChild(sizeOption);
+// }
 //     for (i = 0; i < objects.variety.length; i++) {
 //         const varietyOption = document.createElement('option');
 //         varietyOption.innerText = `${objects.variety[i]}`
