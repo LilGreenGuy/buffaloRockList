@@ -3,7 +3,7 @@ const pepsiCo = [
         brand: "Aquafina",
         variety: ["Original"],
         flavor: ["None"],
-        size: ["20oz", "8pk", "24pk", "32pk"]
+        size: ["20oz", "1.25LT", "8pk", "24pk", "32pk"]
     },
     {
         brand: "Gatorade",
@@ -32,7 +32,7 @@ const pepsiCo = [
     {
         brand: "Pepsi",
         variety: ["Original", "Diet", "Zero"],
-        flavor: ["None", "Wild Cherry"],
+        flavor: ["None", "Caffeine Free", "Lime", "Peach", "Wild Cherry"],
         size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "8pk", "10pk", "12pk", "24pk"]
     },
     {
@@ -45,6 +45,12 @@ const pepsiCo = [
         brand: "Rockstar",
         variety: ["Original", "Zero Sugar"],
         flavor: ["Fruit Punch", "Original"],
+        size: ["16oz", "4pk", "12pk"]
+    },
+    {
+        brand: "Starbucks",
+        variety: ["Original", "Oat Milk"],
+        flavor: ["Caramel", "Mocha", "White Chocolate", "Vanilla"],
         size: ["16oz", "4pk", "12pk"]
     },
     {
@@ -77,7 +83,7 @@ const keurigDrPepper = [
     {
         brand: "Bai",
         variety: ["Original"],
-        flavor: ["Brasilia Blueberry", "Kula Watermelon", "Molokai Coconut", "Zambia Bing Cherry"],
+        flavor: ["Brasilia Blueberry", "Kula Watermelon", "Molokai Coconut", "Puna Coconut Pineapple", "Raspberry Lemon Lime", "Zambia Bing Cherry"],
         size: ["16oz", "4pk"]
     },
     {
@@ -89,7 +95,7 @@ const keurigDrPepper = [
     {
         brand: "Canada Dry",
         variety: ["Original", "Zero"],
-        flavor: ["None", "Fruit Splash"],
+        flavor: ["Ginger Ale", "Fruit Splash"],
         size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "10pk", "12pk", "24pk"]
     },
     {
@@ -113,7 +119,7 @@ const keurigDrPepper = [
     {
         brand: "Dr. Pepper",
         variety: ["Original", "Diet", "Zero"],
-        flavor: ["None", "Cherry", "Coconut", "Cream Soda", "Strawberries and Cream"],
+        flavor: ["None", "Caffeine Free", "Cherry", "Coconut", "Cream Soda", "Strawberries and Cream"],
         size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "8pk", "10pk", "12pk", "24pk"],
     },
     {
@@ -121,6 +127,24 @@ const keurigDrPepper = [
         variety: ["Original"],
         flavor: ["None"],
         size: ["20oz", "2LT", "6pk-16oz", "12pk"]
+    },
+    {
+        brand: "RC Cola",
+        variety: ["Original"],
+        flavor: ["None", "Mixed Berry"],
+        size: ["20oz", "2LT", "6pk-16oz", "12pk"]
+    },
+    {
+        brand: "Schweppes",
+        variety: ["Original"],
+        flavor: ["Ginger Ale"],
+        size: ["6pk-10oz", "6pk-16oz", "12pk"]
+    },
+    {
+        brand: "Snapple",
+        variety: ["Original"],
+        flavor: ["Apple", "Fruit Punch", "Kiwi Strawberry"],
+        size: ["16oz", "6pk", "12pk"]
     }
     // {
     //     brand: ["Sundrop", , "Hawaiian Punch", "RC Cola",
@@ -134,9 +158,9 @@ const keurigDrPepper = [
 
 const buffaloRock = [
     {
-        brand: "Buffalo Rock Ginger Ale",
+        brand: "Buffalo Rock",
         variety: ["Original", "Diet"],
-        flavor: ["None"],
+        flavor: ["Ginger Ale"],
         size: ["12pk"]
     },
     {
@@ -163,7 +187,7 @@ const buffaloRock = [
 const celsius = [
     {
         brand: "Celsius Live Fit",
-        variety: ["Original Variety", "Fizz Free Variety", "Space Variety", "Vibe Variety"],
+        variety: ["Original", "Original Variety", "Fizz Free Variety", "Space Variety", "Vibe Variety"],
         flavor: ["None", "Arctic Vibe", "Astro Vibe", "Blue Razz Lemonade", "Cosmic Vibe", "Cola", "Fantasy Vibe", "Fuji Apple Pear",
             "Galaxy Vibe", "Grape Rush", "Green Apple Cherry", "Kiwi Guava", "Lemon Lime", "Mango Passionfruit", "Oasis Vibe",
             "Orange", "Orangecicle", "Peach Mango", "Peach Vibe", "Raspberry Acai", "Raspberry Peach", "Strawberry Guava",
@@ -301,6 +325,9 @@ function addItem() {
     } else if (parseInt(cases.value) > 1) {
         listItemText += ` ${cases.value} cases`
     }
+    if (cases.value && units.value !== '') {
+        listItemText += ` and`
+    }
     if (parseInt(units.value) === 1) {
         listItemText += ` ${units.value} unit`
     } else if (parseInt(units.value) > 1) {
@@ -310,7 +337,7 @@ function addItem() {
 
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('deleteThis');
-    deleteBtn.innerText = 'X'
+    deleteBtn.innerHTML = '&#10060';
     fillItem.appendChild(deleteBtn);
 
     function deleteItem() {
