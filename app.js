@@ -270,37 +270,7 @@ function createSubFields(value) {
         }
     }
     console.log(brandField.value)
-    // for (let i = 0; i < brandField.length; i++) {
-    //     if()
-    //     const flavorOption = document.createElement('option');
-    //     flavorOption.innerText = `${objects.flavor}`
-    //     flavorField.appendChild(flavorOption);
-    // }
 }
-
-// function createBrands(objects) {
-//     for (i = 0; i < objects.flavor.length; i++) {
-//         const flavorOption = document.createElement('option');
-//         flavorOption.innerText = `${objects.flavor[i]}`
-//         flavorField.appendChild(flavorOption);
-// }
-// for (i = 0; i < objects.size.length; i++) {
-//     const sizeOption = document.createElement('option');
-//     sizeOption.innerText = `${objects.size[i]}`
-//     sizeField.appendChild(sizeOption);
-// }
-//     for (i = 0; i < objects.variety.length; i++) {
-//         const varietyOption = document.createElement('option');
-//         varietyOption.innerText = `${objects.variety[i]}`
-//         varietyField.appendChild(varietyOption);
-//     }
-// }
-
-// function addBrands(object) {
-
-//     for (let i = 0; i < object.length; i++)
-//         object.push(brandArray)
-// }
 
 function addItem() {
     const fillItem = document.createElement('div');
