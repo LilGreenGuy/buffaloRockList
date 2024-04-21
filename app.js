@@ -6,9 +6,16 @@ const pepsiCo = [
         size: ["20oz", "1LT", "8pk", "24pk", "32pk"]
     },
     {
+        brand: "Bubly",
+        variety: ["Original", "Burst"],
+        flavor: ["Blackberry", "Cherry", "Coconut Pineapple", "Grapefruit", "Lime", "Mango", "Raspberry", "Strawberry"],
+        size: ["16oz", "8pk"]
+    },
+    {
         brand: "Gatorade",
         variety: ["Original", "Zero", "Fast Twitch", "Fit"],
-        flavor: ["Cool Blue", "Cucumber Lime", "Fruit Punch", "Glacier Cherry", "Glacier Freeze", "Grape", "Green Apple", "Lemon Lime", "Orange"],
+        flavor: ["Cool Blue", "Cucumber Lime", "Fruit Punch", "Glacier Cherry", "Glacier Freeze", "Grape", "Green Apple",
+            "Lemon Lime", "Orange"],
         size: ["20oz", "28oz", "128oz", "6pk", "8pk", "12pk", "18pk"],
     },
     {
@@ -83,7 +90,8 @@ const keurigDrPepper = [
     {
         brand: "Bai",
         variety: ["Original"],
-        flavor: ["Brasilia Blueberry", "Kula Watermelon", "Molokai Coconut", "Puna Coconut Pineapple", "Raspberry Lemon Lime", "Zambia Bing Cherry"],
+        flavor: ["Brasilia Blueberry", "Kula Watermelon", "Molokai Coconut", "Puna Coconut Pineapple", "Raspberry Lemon Lime",
+            "Zambia Bing Cherry"],
         size: ["16oz", "4pk"]
     },
     {
@@ -247,11 +255,13 @@ const cases = document.getElementById("case");
 const units = document.getElementById("unit");
 const resetBtn = document.querySelector(".reset");
 
-submitBtn.onclick = () => addItem();
-submitBtn.onclick = () => submitBtn.blur();
-resetBtn.onclick = () => resetList();
-companyField.onchange = () => createBrands(companyField.value);
-brandField.onchange = () => createSubFields(companyField.value);
+cases.addEventListener("click", () => emptyField(cases));
+units.addEventListener("click", () => emptyField(units));
+submitBtn.addEventListener("click", () => addItem());
+submitBtn.addEventListener("mouseup", () => submitBtn.blur());
+resetBtn.addEventListener("dblclick", () => resetList());
+companyField.addEventListener("change", () => createBrands(companyField.value));
+brandField.addEventListener("change", () => createSubFields(companyField.value));
 
 function createBrands(value) {
     let brandFieldChildren = brandField.children.length;
@@ -278,7 +288,7 @@ function createBrandFields(objects) {
 
     for (let obj of objects) {
         const brandOption = document.createElement("option");
-        brandOption.innerText = `${obj.brand}`
+        brandOption.innerText = `${obj.brand}`;
         brandField.appendChild(brandOption);
     }
 }
@@ -301,8 +311,8 @@ function createSubFields(value) {
 
     function createFields(objects) {
 
-        let varietyFieldChildren = varietyField.children.length
-        let flavorFieldChildren = flavorField.children.length
+        let varietyFieldChildren = varietyField.children.length;
+        let flavorFieldChildren = flavorField.children.length;
         let sizeFieldChildren = sizeField.children.length;
         for (let i = 1; i < varietyFieldChildren; ++i) {
             varietyField.removeChild(varietyField.lastChild);
@@ -363,17 +373,17 @@ function addItem() {
     }
     listItemText += `${sizeField.value} needs`;
     if (parseInt(cases.value) === 1) {
-        listItemText += ` ${cases.value} case`
+        listItemText += ` ${cases.value} case`;
     } else if (parseInt(cases.value) > 1) {
-        listItemText += ` ${cases.value} cases`
+        listItemText += ` ${cases.value} cases`;
     }
     if (cases.value && units.value !== "") {
-        listItemText += ` and`
+        listItemText += ` and`;
     }
     if (parseInt(units.value) === 1) {
-        listItemText += ` ${units.value} unit`
+        listItemText += ` ${units.value} unit`;
     } else if (parseInt(units.value) > 1) {
-        listItemText += ` ${units.value} units`
+        listItemText += ` ${units.value} units`;
     }
     listedItem.innerHTML = listItemText;
 
@@ -412,6 +422,10 @@ function inputToggles() {
     }
 }
 
+function emptyField(element) {
+    element.value = "";
+}
+
 function resetList() {
-    listTable.innerHTML = ""
+    listTable.innerHTML = "";
 }
