@@ -198,7 +198,7 @@ const buffaloRock = [
 const celsius = [
     {
         brand: "Celsius Live Fit",
-        variety: ["Original", "Original Variety", "Fizz Free Variety", "Space Variety", "Vibe Variety"],
+        variety: ["Original", "Variety Pack", "Fizz Free Variety Pack", "Space Variety Pack", "Vibe Variety Pack"],
         flavor: ["None", "Arctic Vibe", "Astro Vibe", "Blue Razz Lemonade", "Cosmic Vibe", "Cola", "Fantasy Vibe", "Fuji Apple Pear",
             "Galaxy Vibe", "Grape Rush", "Green Apple Cherry", "Kiwi Guava", "Lemon Lime", "Mango Passionfruit", "Oasis Vibe",
             "Orange", "Orangecicle", "Peach Mango", "Peach Vibe", "Raspberry Acai", "Raspberry Peach", "Strawberry Guava",
@@ -207,7 +207,7 @@ const celsius = [
     },
     {
         brand: "Celsius Essentials",
-        variety: ["Original", "Variety"],
+        variety: ["Original", "Variety Pack"],
         flavor: ["Blue Crush", "Cherry Limeade", "Dragonberry", "Fruit Burst", "Mango Tango"],
         size: ["16oz", "12pk"]
     }
@@ -270,6 +270,7 @@ function createBrands(value) {
         createBrandFields(pepsiCo);
     }
 
+    inputToggles()
 }
 
 function createBrandFields(objects) {
@@ -294,6 +295,9 @@ function createSubFields(value) {
     } else if (value === "Pepsi Co") {
         createFields(pepsiCo);
     }
+
+    inputToggles();
+
     function createFields(objects) {
 
         let varietyFieldChildren = varietyField.children.length
@@ -384,6 +388,28 @@ function addItem() {
     }
 
     deleteBtn.onclick = () => deleteItem();
+}
+
+function inputToggles() {
+    if (companyField.value != "") {
+        brandField.removeAttribute('disabled');
+    } else if (companyField.value === "") {
+        brandField.setAttribute('disabled', "");
+    }
+
+    if (brandField.value != "") {
+        varietyField.removeAttribute("disabled");
+        flavorField.removeAttribute("disabled");
+        sizeField.removeAttribute("disabled");
+        cases.removeAttribute("disabled");
+        units.removeAttribute("disabled");
+    } else if (brandField.value === ""){
+        varietyField.setAttribute("disabled", "");
+        flavorField.setAttribute("disabled", "");
+        sizeField.setAttribute("disabled", "");
+        cases.setAttribute("disabled", "");
+        units.setAttribute("disabled", "");
+    }
 }
 
 function resetList() {
