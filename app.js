@@ -237,15 +237,15 @@ const lipton = [
 
 
 const companyField = document.querySelector("#parentCompany");
-const brandField = document.getElementById('brand');
-const flavorField = document.getElementById('flavor');
-const varietyField = document.getElementById('variety');
-const sizeField = document.getElementById('size');
-const submitBtn = document.querySelector('.submit')
-const listTable = document.querySelector('.table');
-const cases = document.getElementById('case');
-const units = document.getElementById('unit');
-const resetBtn = document.querySelector('.reset');
+const brandField = document.getElementById("brand");
+const flavorField = document.getElementById("flavor");
+const varietyField = document.getElementById("variety");
+const sizeField = document.getElementById("size");
+const submitBtn = document.querySelector(".submit")
+const listTable = document.querySelector(".table");
+const cases = document.getElementById("case");
+const units = document.getElementById("unit");
+const resetBtn = document.querySelector(".reset");
 
 submitBtn.onclick = () => addItem();
 resetBtn.onclick = () => resetList();
@@ -276,7 +276,7 @@ function createBrands(value) {
 function createBrandFields(objects) {
 
     for (let obj of objects) {
-        const brandOption = document.createElement('option');
+        const brandOption = document.createElement("option");
         brandOption.innerText = `${obj.brand}`
         brandField.appendChild(brandOption);
     }
@@ -317,17 +317,17 @@ function createSubFields(value) {
             if (brandField.value === objects[i].brand) {
                 let brandSelected = objects[i];
                 for (j = 0; j < brandSelected.variety.length; j++) {
-                    const varietyOption = document.createElement('option');
+                    const varietyOption = document.createElement("option");
                     varietyOption.innerText = `${brandSelected.variety[j]}`;
                     varietyField.appendChild(varietyOption);
                 }
                 for (j = 0; j < brandSelected.flavor.length; j++) {
-                    const flavorOption = document.createElement('option');
+                    const flavorOption = document.createElement("option");
                     flavorOption.innerText = `${brandSelected.flavor[j]}`;
                     flavorField.appendChild(flavorOption);
                 }
                 for (j = 0; j < brandSelected.size.length; j++) {
-                    const sizeOption = document.createElement('option');
+                    const sizeOption = document.createElement("option");
                     sizeOption.innerText = `${brandSelected.size[j]}`;
                     sizeField.appendChild(sizeOption);
                 }
@@ -337,28 +337,28 @@ function createSubFields(value) {
 }
 
 function addItem() {
-    submitBtn.blur();
-    const fillItem = document.createElement('div');
-    fillItem.classList.add('todo');
+    document.querySelector(".submit").blur();
+    const fillItem = document.createElement("div");
+    fillItem.classList.add("todo");
     listTable.appendChild(fillItem);
 
-    const listedItem = document.createElement('p');
-    listedItem.classList.add('listItem');
+    const listedItem = document.createElement("p");
+    listedItem.classList.add("listItem");
     fillItem.appendChild(listedItem);
-    if (brandField.value === ''
-        || flavorField.value === ''
-        || varietyField.value === ''
-        || sizeField.value === ''
-        || (cases.value === '0' || cases.value === '')
-        && (units.value === '0' || units.value === '')) {
+    if (brandField.value === ""
+        || flavorField.value === ""
+        || varietyField.value === ""
+        || sizeField.value === ""
+        || (cases.value === "0" || cases.value === "")
+        && (units.value === "0" || units.value === "")) {
         const parent = listedItem.parentNode;
         return parent.remove();
     }
     let listItemText = `${brandField.value} `;
-    if (varietyField.value != 'Original') {
+    if (varietyField.value != "Original") {
         listItemText += `${varietyField.value} `;
     }
-    if (flavorField.value !== 'None') {
+    if (flavorField.value !== "None") {
         listItemText += `${flavorField.value} `;
     }
     listItemText += `${sizeField.value} needs`;
@@ -367,7 +367,7 @@ function addItem() {
     } else if (parseInt(cases.value) > 1) {
         listItemText += ` ${cases.value} cases`
     }
-    if (cases.value && units.value !== '') {
+    if (cases.value && units.value !== "") {
         listItemText += ` and`
     }
     if (parseInt(units.value) === 1) {
@@ -377,9 +377,9 @@ function addItem() {
     }
     listedItem.innerHTML = listItemText;
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.classList.add('deleteThis');
-    deleteBtn.innerHTML = '&#10060';
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("deleteThis");
+    deleteBtn.innerHTML = "&#10060";
     fillItem.appendChild(deleteBtn);
 
     function deleteItem() {
@@ -392,9 +392,9 @@ function addItem() {
 
 function inputToggles() {
     if (companyField.value != "") {
-        brandField.removeAttribute('disabled');
+        brandField.removeAttribute("disabled");
     } else if (companyField.value === "") {
-        brandField.setAttribute('disabled', "");
+        brandField.setAttribute("disabled", "");
     }
 
     if (brandField.value != "") {
@@ -413,5 +413,5 @@ function inputToggles() {
 }
 
 function resetList() {
-    listTable.innerHTML = ''
+    listTable.innerHTML = ""
 }
