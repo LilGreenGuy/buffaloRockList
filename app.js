@@ -248,6 +248,7 @@ const units = document.getElementById("unit");
 const resetBtn = document.querySelector(".reset");
 
 submitBtn.onclick = () => addItem();
+submitBtn.onclick = () => submitBtn.blur();
 resetBtn.onclick = () => resetList();
 companyField.onchange = () => createBrands(companyField.value);
 brandField.onchange = () => createSubFields(companyField.value);
@@ -337,7 +338,6 @@ function createSubFields(value) {
 }
 
 function addItem() {
-    document.querySelector(".submit").blur();
     const fillItem = document.createElement("div");
     fillItem.classList.add("todo");
     listTable.appendChild(fillItem);
@@ -403,7 +403,7 @@ function inputToggles() {
         sizeField.removeAttribute("disabled");
         cases.removeAttribute("disabled");
         units.removeAttribute("disabled");
-    } else if (brandField.value === ""){
+    } else if (brandField.value === "") {
         varietyField.setAttribute("disabled", "");
         flavorField.setAttribute("disabled", "");
         sizeField.setAttribute("disabled", "");
