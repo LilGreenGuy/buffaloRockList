@@ -3,19 +3,13 @@ const pepsiCo = [
         brand: "Aquafina",
         variety: ["Original"],
         flavor: ["None"],
-        size: ["20oz", "1.25LT", "8pk", "24pk", "32pk"]
+        size: ["20oz", "1LT", "8pk", "24pk", "32pk"]
     },
     {
         brand: "Gatorade",
         variety: ["Original", "Zero", "Fast Twitch", "Fit"],
         flavor: ["Cool Blue", "Cucumber Lime", "Fruit Punch", "Glacier Cherry", "Glacier Freeze", "Grape", "Green Apple", "Lemon Lime", "Orange"],
         size: ["20oz", "28oz", "128oz", "6pk", "8pk", "12pk", "18pk"],
-    },
-    {
-        brand: "Lipton",
-        variety: ["Original", "Diet"],
-        flavor: ["Georiga Peach", "Mixed Berry", "Lemon", "White Raspberry"],
-        size: ["20oz", "2LT", "12pk"]
     },
     {
         brand: "Mountain Dew",
@@ -28,6 +22,12 @@ const pepsiCo = [
         variety: ["Original", "Zero"],
         flavor: ["None"],
         size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "10pk", "12pk"]
+    },
+    {
+        brand: "Muscle Milk",
+        variety: ["Original", "Plant-based"],
+        flavor: ["Chocolate", "Vanilla"],
+        size: ["16oz"]
     },
     {
         brand: "Pepsi",
@@ -141,18 +141,29 @@ const keurigDrPepper = [
         size: ["6pk-10oz", "6pk-16oz", "12pk"]
     },
     {
+        brand: "Squirt",
+        variety: ["Original"],
+        flavor: ["None"],
+        size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "10pk", "12pk"]
+    },
+    {
         brand: "Snapple",
         variety: ["Original"],
         flavor: ["Apple", "Fruit Punch", "Kiwi Strawberry"],
         size: ["16oz", "6pk", "12pk"]
+    },
+    {
+        brand: "Tahitian Treat",
+        variety: ["Original"],
+        flavor: ["Fruit Punch"],
+        size: ["20oz", "2LT", "6pk-16oz", "12pk"]
+    },
+    {
+        brand: "Vernors",
+        variety: ["Original"],
+        flavor: ["Ginger Ale"],
+        size: ["12pk"]
     }
-    // {
-    //     brand: ["Sundrop", , "Hawaiian Punch", "RC Cola",
-    //         "Schweppes", "Snapple", "Squirt", "Vernors"],
-    //     variety: [],
-    //     flavor: ["Cream Soda", "Orange", "Strawberry", "Strawberries and Cream"],
-    //     size: []
-    // }
 ];
 
 
@@ -202,6 +213,28 @@ const celsius = [
     }
 ];
 
+const lipton = [
+    {
+        brand: "Brisk",
+        variety: ["Original"],
+        flavor: ["Blood Orange", "Iced Tea + Lemonade", "Lemon", "Strawberry Melon", "Sweet Tea"],
+        size: ["1LT", "12pk"]
+    },
+    {
+        brand: "Lipton",
+        variety: ["Original", "Diet"],
+        flavor: ["Green Tea Citrus", "Half & Half Iced Tea/Lemonade", "Lemon", "Mixed Berry", "Peach", "Pineapple Mango", "Watermelon", "White Raspberry"],
+        size: ["20oz", "2LT", "12pk"]
+    },
+    {
+        brand: "Pure Leaf",
+        variety: ["Original", "Zero"],
+        flavor: ["Extra Sweet", "Green Tea", "Lemon", "Raspberry", "Sweet Tea"],
+        size: ["6pk", "12pk"]
+    }
+];
+
+
 
 const companyField = document.querySelector("#parentCompany");
 const brandField = document.getElementById('brand');
@@ -229,6 +262,8 @@ function createBrands(value) {
         createBrandFields(buffaloRock);
     } else if (value === "Celsius") {
         createBrandFields(celsius);
+    } else if (value === "Lipton Teas") {
+        createBrandFields(lipton);
     } else if (value === "Keurig Dr. Pepper") {
         createBrandFields(keurigDrPepper);
     } else if (value === "Pepsi Co") {
@@ -252,6 +287,8 @@ function createSubFields(value) {
         createFields(buffaloRock);
     } else if (value === "Celsius") {
         createFields(celsius);
+    } else if (value === "Lipton Teas") {
+        createFields(lipton);
     } else if (value === "Keurig Dr. Pepper") {
         createFields(keurigDrPepper);
     } else if (value === "Pepsi Co") {
@@ -308,7 +345,8 @@ function addItem() {
         || flavorField.value === ''
         || varietyField.value === ''
         || sizeField.value === ''
-        || (cases.value === '0' || cases.value === '') && (units.value === '0' || units.value === '')) {
+        || (cases.value === '0' || cases.value === '')
+        && (units.value === '0' || units.value === '')) {
         const parent = listedItem.parentNode;
         return parent.remove();
     }
