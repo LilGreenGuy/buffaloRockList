@@ -334,10 +334,10 @@ function createSubFields(value) {
             }
         }
     }
-    console.log(brandField.value)
 }
 
 function addItem() {
+    submitBtn.blur();
     const fillItem = document.createElement('div');
     fillItem.classList.add('todo');
     listTable.appendChild(fillItem);
