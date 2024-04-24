@@ -128,7 +128,7 @@ const keurigDrPepper = [
         brand: "Dr. Pepper",
         variety: ["Original", "Diet", "Zero"],
         flavor: ["None", "Caffeine Free", "Cherry", "Coconut", "Cream Soda", "Strawberries and Cream"],
-        size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "8pk", "10pk", "12pk", "24pk"],
+        size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "8pk", "10pk", "12pk", "24pk"]
     },
     {
         brand: "Hawaiian Punch",
@@ -159,6 +159,13 @@ const keurigDrPepper = [
         variety: ["Original"],
         flavor: ["Apple", "Fruit Punch", "Kiwi Strawberry"],
         size: ["16oz", "6pk", "12pk"]
+    },
+    {
+        brand: "Sunkist",
+        variety: ["Original", "Zero"],
+        flavor: ["Berry Lemonade", "Cherry Limeade", "Fruit Punch", "Orange", "Peach", "Strawberry", 
+        "Strawberry Orange", "Watermelon Lemonade"],
+        size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "8pk", "10pk", "12pk", "24pk"]
     },
     {
         brand: "Tahitian Treat",
