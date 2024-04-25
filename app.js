@@ -193,7 +193,7 @@ const buffaloRock = [
         brand: "Grapico",
         variety: ["Original", "Diet"],
         flavor: ["None"],
-        size: ["20oz", "2LT", "12pk"]
+        size: ["20oz", "2LT", "6pk-16oz", "12pk"]
     },
     {
         brand: "Sundrop",
@@ -317,15 +317,18 @@ function createSubFields(value) {
     inputToggles();
 
     function createFields(objects) {
-        const removeChildren = (options) => {
-            for (let i = 1; i < options.children.length; ++i) {
-                options.removeChild(varietyField.lastChild);
-            }
+        let varietyFieldChildren = varietyField.children.length
+        let flavorFieldChildren = flavorField.children.length
+        let sizeFieldChildren = sizeField.children.length;
+        for (let i = 1; i < varietyFieldChildren; ++i) {
+            varietyField.removeChild(varietyField.lastChild);
         }
-
-        removeChildren(varietyField);
-        removeChildren(flavorField);
-        removeChildren(sizeField);
+        for (let i = 1; i < flavorFieldChildren; ++i) {
+            flavorField.removeChild(flavorField.lastChild);
+        }
+        for (let i = 1; i < sizeFieldChildren; ++i) {
+            sizeField.removeChild(sizeField.lastChild);
+        }
 
         for (i = 0; i < objects.length; i++) {
             if (brandField.value === objects[i].brand) {
