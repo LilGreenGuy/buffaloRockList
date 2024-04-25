@@ -310,19 +310,15 @@ function createSubFields(value) {
     inputToggles();
 
     function createFields(objects) {
+        const removeChildren = (options) => {
+            for (let i = 1; i < options.children.length; ++i) {
+                options.removeChild(varietyField.lastChild);
+            }
+        }
 
-        let varietyFieldChildren = varietyField.children.length;
-        let flavorFieldChildren = flavorField.children.length;
-        let sizeFieldChildren = sizeField.children.length;
-        for (let i = 1; i < varietyFieldChildren; ++i) {
-            varietyField.removeChild(varietyField.lastChild);
-        }
-        for (let i = 1; i < flavorFieldChildren; ++i) {
-            flavorField.removeChild(flavorField.lastChild);
-        }
-        for (let i = 1; i < sizeFieldChildren; ++i) {
-            sizeField.removeChild(sizeField.lastChild);
-        }
+        removeChildren(varietyField);
+        removeChildren(flavorField);
+        removeChildren(sizeField);
 
         for (i = 0; i < objects.length; i++) {
             if (brandField.value === objects[i].brand) {
@@ -332,16 +328,22 @@ function createSubFields(value) {
                     varietyOption.innerText = `${brandSelected.variety[j]}`;
                     varietyField.appendChild(varietyOption);
                 }
+                const varietyArray = document.querySelectorAll("#variety option");
+                varietyArray[1].setAttribute("selected", "");
                 for (j = 0; j < brandSelected.flavor.length; j++) {
                     const flavorOption = document.createElement("option");
                     flavorOption.innerText = `${brandSelected.flavor[j]}`;
                     flavorField.appendChild(flavorOption);
                 }
+                const flavorArray = document.querySelectorAll("#flavor option");
+                flavorArray[1].setAttribute("selected", "");
                 for (j = 0; j < brandSelected.size.length; j++) {
                     const sizeOption = document.createElement("option");
                     sizeOption.innerText = `${brandSelected.size[j]}`;
                     sizeField.appendChild(sizeOption);
                 }
+                const sizeArray = document.querySelectorAll("#size option");
+                sizeArray[1].setAttribute("selected", "");
             }
         }
     }
