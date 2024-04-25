@@ -21,7 +21,7 @@ const pepsiCo = [
     {
         brand: "Mountain Dew",
         variety: ["Original", "Diet", "Zero"],
-        flavor: ["None", "Baja", "Code Red", "Frostbite", "Livewire", "Major Melon", "Voltage"],
+        flavor: ["None", "Baja", "Caffeine Free", "Code Red", "Frostbite", "Livewire", "Major Melon", "Voltage"],
         size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "8pk", "10pk", "12pk", "24pk"]
     },
     {
@@ -271,6 +271,9 @@ companyField.addEventListener("change", () => createBrands(companyField.value));
 brandField.addEventListener("change", () => createSubFields(companyField.value));
 
 function createBrands(value) {
+    if (brandField.value !== "") {
+        removeChildren();
+    }
     let brandFieldChildren = brandField.children.length;
     for (let i = 1; i < brandFieldChildren; ++i) {
         brandField.removeChild(brandField.lastChild);
@@ -287,7 +290,6 @@ function createBrands(value) {
     } else if (value === "Pepsi Co") {
         createBrandFields(pepsiCo);
     }
-
     inputToggles()
 }
 
@@ -317,19 +319,7 @@ function createSubFields(value) {
     inputToggles();
 
     function createFields(objects) {
-        let varietyFieldChildren = varietyField.children.length
-        let flavorFieldChildren = flavorField.children.length
-        let sizeFieldChildren = sizeField.children.length;
-        for (let i = 1; i < varietyFieldChildren; ++i) {
-            varietyField.removeChild(varietyField.lastChild);
-        }
-        for (let i = 1; i < flavorFieldChildren; ++i) {
-            flavorField.removeChild(flavorField.lastChild);
-        }
-        for (let i = 1; i < sizeFieldChildren; ++i) {
-            sizeField.removeChild(sizeField.lastChild);
-        }
-
+        removeChildren()
         for (i = 0; i < objects.length; i++) {
             if (brandField.value === objects[i].brand) {
                 let brandSelected = objects[i];
@@ -440,4 +430,20 @@ function emptyField(element) {
 
 function resetList() {
     listTable.innerHTML = "";
+}
+
+
+function removeChildren() {
+    let varietyFieldChildren = varietyField.children.length
+    let flavorFieldChildren = flavorField.children.length
+    let sizeFieldChildren = sizeField.children.length;
+    for (let i = 1; i < varietyFieldChildren; ++i) {
+        varietyField.removeChild(varietyField.lastChild);
+    }
+    for (let i = 1; i < flavorFieldChildren; ++i) {
+        flavorField.removeChild(flavorField.lastChild);
+    }
+    for (let i = 1; i < sizeFieldChildren; ++i) {
+        sizeField.removeChild(sizeField.lastChild);
+    }
 }
