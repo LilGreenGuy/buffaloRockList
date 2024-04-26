@@ -13,7 +13,7 @@ const pepsiCo = [
     },
     {
         brand: "Gatorade",
-        variety: ["Original", "Zero", "Fast Twitch", "Fit"],
+        variety: ["Original", "Zero", "Fast Twitch", "Fit", "Lyte"],
         flavor: ["Cool Blue", "Cucumber Lime", "Fruit Punch", "Glacier Cherry", "Glacier Freeze", "Grape", "Green Apple",
             "Lemon Lime", "Orange"],
         size: ["20oz", "28oz", "128oz", "6pk", "8pk", "12pk", "18pk"],
@@ -27,7 +27,7 @@ const pepsiCo = [
     {
         brand: "Mug",
         variety: ["Original", "Zero"],
-        flavor: ["None"],
+        flavor: ["Rootbeer"],
         size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "10pk", "12pk"]
     },
     {
@@ -45,8 +45,8 @@ const pepsiCo = [
     {
         brand: "Propel",
         variety: ["Original"],
-        flavor: ["Grape", "Lemon", "Strawberry Kiwi"],
-        size: ["20oz", "1.25LT", "6pk", "12pk"]
+        flavor: ["Berry", "Grape", "Lemon", "Strawberry Kiwi"],
+        size: ["20oz", "1LT", "6pk", "12pk"]
     },
     {
         brand: "Rockstar",
@@ -71,8 +71,8 @@ const pepsiCo = [
 const keurigDrPepper = [
     {
         brand: "Ashoc",
-        variety: ["Original"],
-        flavor: ["Berry Lemonade"],
+        variety: ["Original", "Accelerator"],
+        flavor: ["Berry Lemonade", "Peach Paradise", "Rocket Pop", "Tropical Punch"],
         size: ["12oz", "16oz"]
     },
     {
@@ -203,7 +203,7 @@ const buffaloRock = [
     },
     {
         brand: "Sunfresh",
-        variety: ["Original, Diet"],
+        variety: ["Original", "Diet"],
         flavor: ["None"],
         size: ["20oz", "2LT", "12pk"]
     }
