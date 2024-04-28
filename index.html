@@ -20,9 +20,9 @@
             </div>
         </header>
 
-        <section class="beverageInputs">
+        <form name="listSubmitForm" id="inputForm" class="beverageInputs" action="/">
             <div class="inputs">
-                <select id="parentCompany" class="inputFields">
+                <select name="parentCompany" id="parentCompany" class="inputFields">
                     <option value="">Parent Company:</option>
                     <option value="Buffalo Rock">Buffalo Rock</option>
                     <option value="Celsius">Celsius</option>
@@ -30,27 +30,27 @@
                     <option value="Keurig Dr. Pepper">Keurig Dr. Pepper</option>
                     <option value="Pepsi Co">Pepsi Co</option>
                 </select>
-                <select id="brand" class="inputFields" disabled>
+                <select name="brand" id="brand" class="inputFields" disabled>
                     <option value="">Beverage Brand:</option>
                 </select>
-                <select id="variety" class="inputFields" disabled>
+                <select name="variety" id="variety" class="inputFields" disabled>
                     <option value="">Variety:</option>
                 </select>
-                <select id="flavor" class="inputFields" disabled>
+                <select name="flavor" id="flavor" class="inputFields" disabled>
                     <option value="">Flavor:</option>
                 </select>
-                <select id="size" class="inputFields" disabled>
+                <select name="size" id="size" class="inputFields" disabled>
                     <option value="">Package Size:</option>
                 </select>
             </div>
             <div class="fillInputs">
-                <input type="number" id="case" class="inputFields numberInput" placeholder="Cases" disabled>
-                <input type="number" id="unit" class="inputFields numberInput" placeholder="Units" disabled>
-                <button class="submit btn">ADD</button>
-                <button class="reset btn">RESET</button>
+                <input name="cases" type="number" id="case" class="inputFields numberInput" placeholder="Cases" disabled>
+                <input name="units" type="number" id="unit" class="inputFields numberInput" placeholder="Units" disabled>
+                <button name="add" class="submit btn">ADD</button>
+                <button name="reset" class="reset btn">RESET</button>
             </div>
 
-        </section>
+        </form>
         <section id="list">
             <h2>Items to Fill</h2>
             <div class="table">

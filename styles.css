@@ -147,10 +147,10 @@ h2 {
 }
 
 .inputFields {
-    height: 2rem;
     color: #004b93;
     border-radius: 0.25rem;
     border: 1px solid darkgrey;
+    height: 2rem;
 }
 
 .inputFields:focus {

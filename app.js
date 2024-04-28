@@ -250,25 +250,30 @@ const lipton = [
 ];
 
 
-
-const companyField = document.querySelector("#parentCompany");
-const brandField = document.getElementById("brand");
-const flavorField = document.getElementById("flavor");
-const varietyField = document.getElementById("variety");
-const sizeField = document.getElementById("size");
-const submitBtn = document.querySelector(".submit")
+const inputForm = document.querySelector("#inputForm");
+const companyField = inputForm.elements.parentCompany;
+const brandField = inputForm.elements.brand;
+const flavorField = inputForm.elements.flavor;
+const varietyField = inputForm.elements.variety;
+const sizeField = inputForm.elements.size;
+const submitBtn = inputForm.elements.add;
 const listTable = document.querySelector(".table");
-const cases = document.getElementById("case");
-const units = document.getElementById("unit");
-const resetBtn = document.querySelector(".reset");
+const cases = inputForm.elements.cases;
+const units = inputForm.elements.units;
+const resetBtn = inputForm.elements.reset;
 
+inputForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+});
+submitBtn.addEventListener("click", () => {
+    addItem();
+    submitBtn.blur();
+})
 cases.addEventListener("click", () => emptyField(cases));
 units.addEventListener("click", () => emptyField(units));
-submitBtn.addEventListener("click", () => addItem());
-submitBtn.addEventListener("mouseup", () => submitBtn.blur());
-resetBtn.addEventListener("dblclick", () => resetList());
 companyField.addEventListener("change", () => createBrands(companyField.value));
 brandField.addEventListener("change", () => createSubFields(companyField.value));
+resetBtn.addEventListener("click", () => resetList());
 
 function createBrands(value) {
     if (brandField.value !== "") {
@@ -298,7 +303,7 @@ function createBrandFields(objects) {
     for (let obj of objects) {
         const brandOption = document.createElement("option");
         brandOption.innerText = `${obj.brand}`;
-        brandField.appendChild(brandOption);
+        brandField.append(brandOption);
     }
 }
 
@@ -326,21 +331,21 @@ function createSubFields(value) {
                 for (j = 0; j < brandSelected.variety.length; j++) {
                     const varietyOption = document.createElement("option");
                     varietyOption.innerText = `${brandSelected.variety[j]}`;
-                    varietyField.appendChild(varietyOption);
+                    varietyField.append(varietyOption);
                 }
                 const varietyArray = document.querySelectorAll("#variety option");
                 varietyArray[1].setAttribute("selected", "");
                 for (j = 0; j < brandSelected.flavor.length; j++) {
                     const flavorOption = document.createElement("option");
                     flavorOption.innerText = `${brandSelected.flavor[j]}`;
-                    flavorField.appendChild(flavorOption);
+                    flavorField.append(flavorOption);
                 }
                 const flavorArray = document.querySelectorAll("#flavor option");
                 flavorArray[1].setAttribute("selected", "");
                 for (j = 0; j < brandSelected.size.length; j++) {
                     const sizeOption = document.createElement("option");
                     sizeOption.innerText = `${brandSelected.size[j]}`;
-                    sizeField.appendChild(sizeOption);
+                    sizeField.append(sizeOption);
                 }
                 const sizeArray = document.querySelectorAll("#size option");
                 sizeArray[1].setAttribute("selected", "");
@@ -352,11 +357,11 @@ function createSubFields(value) {
 function addItem() {
     const fillItem = document.createElement("div");
     fillItem.classList.add("todo");
-    listTable.appendChild(fillItem);
+    listTable.append(fillItem);
 
     const listedItem = document.createElement("p");
     listedItem.classList.add("listItem");
-    fillItem.appendChild(listedItem);
+    fillItem.append(listedItem);
     if (brandField.value === ""
         || flavorField.value === ""
         || varietyField.value === ""
@@ -366,14 +371,14 @@ function addItem() {
         const parent = listedItem.parentNode;
         return parent.remove();
     }
-    let listItemText = `${brandField.value} `;
+    let listItemText = `<b>${brandField.value} `;
     if (varietyField.value != "Original") {
         listItemText += `${varietyField.value} `;
     }
     if (flavorField.value !== "None") {
         listItemText += `${flavorField.value} `;
     }
-    listItemText += `${sizeField.value} needs`;
+    listItemText += `${sizeField.value}</b> needs`;
     if (parseInt(cases.value) === 1) {
         listItemText += ` ${cases.value} case`;
     } else if (parseInt(cases.value) > 1) {
@@ -392,7 +397,7 @@ function addItem() {
     const deleteBtn = document.createElement("button");
     deleteBtn.classList.add("deleteThis");
     deleteBtn.innerHTML = "&#10060";
-    fillItem.appendChild(deleteBtn);
+    fillItem.append(deleteBtn);
 
     function deleteItem() {
         const parent = deleteBtn.parentNode;
