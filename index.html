@@ -22,7 +22,7 @@
 
         <form name="listSubmitForm" id="inputForm" class="beverageInputs" action="/">
             <div class="inputs">
-                <select name="parentCompany" id="parentCompany" class="inputFields">
+                <select name="parentCompany" id="parentCompany" class="inputFields" required>
                     <option value="">Parent Company:</option>
                     <option value="Buffalo Rock">Buffalo Rock</option>
                     <option value="Celsius">Celsius</option>
@@ -30,16 +30,16 @@
                     <option value="Keurig Dr. Pepper">Keurig Dr. Pepper</option>
                     <option value="Pepsi Co">Pepsi Co</option>
                 </select>
-                <select name="brand" id="brand" class="inputFields" disabled>
+                <select name="brand" id="brand" class="inputFields" disabled required>
                     <option value="">Beverage Brand:</option>
                 </select>
-                <select name="variety" id="variety" class="inputFields" disabled>
+                <select name="variety" id="variety" class="inputFields" disabled required>
                     <option value="">Variety:</option>
                 </select>
-                <select name="flavor" id="flavor" class="inputFields" disabled>
+                <select name="flavor" id="flavor" class="inputFields" disabled required>
                     <option value="">Flavor:</option>
                 </select>
-                <select name="size" id="size" class="inputFields" disabled>
+                <select name="size" id="size" class="inputFields" disabled required>
                     <option value="">Package Size:</option>
                 </select>
             </div>
