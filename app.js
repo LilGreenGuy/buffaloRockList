@@ -251,37 +251,39 @@ const lipton = [
 
 
 const inputForm = document.querySelector("#inputForm");
-const companyField = inputForm.elements.parentCompany;
-const brandField = inputForm.elements.brand;
-const flavorField = inputForm.elements.flavor;
-const varietyField = inputForm.elements.variety;
-const sizeField = inputForm.elements.size;
-const submitBtn = inputForm.elements.add;
+const inputs = {
+    companyField: inputForm.elements.parentCompany,
+    brandField: inputForm.elements.brand,
+    flavorField: inputForm.elements.flavor,
+    varietyField: inputForm.elements.variety,
+    sizeField: inputForm.elements.size,
+    cases: inputForm.elements.cases,
+    units: inputForm.elements.units,
+    submitBtn: inputForm.elements.add,
+    resetBtn: inputForm.elements.reset
+};
 const listTable = document.querySelector(".table");
-const cases = inputForm.elements.cases;
-const units = inputForm.elements.units;
-const resetBtn = inputForm.elements.reset;
 
 inputForm.addEventListener("submit", function (e) {
     e.preventDefault();
 });
-submitBtn.addEventListener("click", () => {
+inputs.submitBtn.addEventListener("click", () => {
     addItem();
-    submitBtn.blur();
+    inputs.submitBtn.blur();
 })
-cases.addEventListener("click", () => emptyField(cases));
-units.addEventListener("click", () => emptyField(units));
-companyField.addEventListener("change", () => createBrands(companyField.value));
-brandField.addEventListener("change", () => createSubFields(companyField.value));
-resetBtn.addEventListener("click", () => resetList());
+inputs.cases.addEventListener("click", () => emptyField(inputs.cases));
+inputs.units.addEventListener("click", () => emptyField(inputs.units));
+inputs.companyField.addEventListener("change", () => createBrands(inputs.companyField.value));
+inputs.brandField.addEventListener("change", () => createSubFields(inputs.companyField.value));
+inputs.resetBtn.addEventListener("click", () => resetList());
 
 function createBrands(value) {
-    if (brandField.value !== "") {
+    if (inputs.brandField.value !== "") {
         removeChildren();
     }
-    let brandFieldChildren = brandField.children.length;
+    let brandFieldChildren = inputs.brandField.children.length;
     for (let i = 1; i < brandFieldChildren; ++i) {
-        brandField.removeChild(brandField.lastChild);
+        inputs.brandField.removeChild(inputs.brandField.lastChild);
     }
 
     if (value === "Buffalo Rock") {
@@ -303,7 +305,7 @@ function createBrandFields(objects) {
     for (let obj of objects) {
         const brandOption = document.createElement("option");
         brandOption.innerText = `${obj.brand}`;
-        brandField.append(brandOption);
+        inputs.brandField.append(brandOption);
     }
 }
 
@@ -326,26 +328,26 @@ function createSubFields(value) {
     function createFields(objects) {
         removeChildren()
         for (i = 0; i < objects.length; i++) {
-            if (brandField.value === objects[i].brand) {
+            if (inputs.brandField.value === objects[i].brand) {
                 let brandSelected = objects[i];
                 for (j = 0; j < brandSelected.variety.length; j++) {
                     const varietyOption = document.createElement("option");
                     varietyOption.innerText = `${brandSelected.variety[j]}`;
-                    varietyField.append(varietyOption);
+                    inputs.varietyField.append(varietyOption);
                 }
                 const varietyArray = document.querySelectorAll("#variety option");
                 varietyArray[1].setAttribute("selected", "");
                 for (j = 0; j < brandSelected.flavor.length; j++) {
                     const flavorOption = document.createElement("option");
                     flavorOption.innerText = `${brandSelected.flavor[j]}`;
-                    flavorField.append(flavorOption);
+                    inputs.flavorField.append(flavorOption);
                 }
                 const flavorArray = document.querySelectorAll("#flavor option");
                 flavorArray[1].setAttribute("selected", "");
                 for (j = 0; j < brandSelected.size.length; j++) {
                     const sizeOption = document.createElement("option");
                     sizeOption.innerText = `${brandSelected.size[j]}`;
-                    sizeField.append(sizeOption);
+                    inputs.sizeField.append(sizeOption);
                 }
                 const sizeArray = document.querySelectorAll("#size option");
                 sizeArray[1].setAttribute("selected", "");
@@ -362,35 +364,35 @@ function addItem() {
     const listedItem = document.createElement("p");
     listedItem.classList.add("listItem");
     fillItem.append(listedItem);
-    if (brandField.value === ""
-        || flavorField.value === ""
-        || varietyField.value === ""
-        || sizeField.value === ""
-        || (cases.value === "0" || cases.value === "")
-        && (units.value === "0" || units.value === "")) {
+    if (inputs.brandField.value === ""
+        || inputs.flavorField.value === ""
+        || inputs.varietyField.value === ""
+        || inputs.sizeField.value === ""
+        || (inputs.cases.value === "0" || inputs.cases.value === "")
+        && (inputs.units.value === "0" || inputs.units.value === "")) {
         const parent = listedItem.parentNode;
         return parent.remove();
     }
-    let listItemText = `<b>${brandField.value} `;
-    if (varietyField.value != "Original") {
-        listItemText += `${varietyField.value} `;
+    let listItemText = `<b>${inputs.brandField.value} `;
+    if (inputs.varietyField.value != "Original") {
+        listItemText += `${inputs.varietyField.value} `;
     }
-    if (flavorField.value !== "None") {
-        listItemText += `${flavorField.value} `;
+    if (inputs.flavorField.value !== "None") {
+        listItemText += `${inputs.flavorField.value} `;
     }
-    listItemText += `${sizeField.value}</b> needs`;
-    if (parseInt(cases.value) === 1) {
-        listItemText += ` ${cases.value} case`;
-    } else if (parseInt(cases.value) > 1) {
-        listItemText += ` ${cases.value} cases`;
+    listItemText += `${inputs.sizeField.value}</b> needs`;
+    if (parseInt(inputs.cases.value) === 1) {
+        listItemText += ` ${inputs.cases.value} case`;
+    } else if (parseInt(inputs.cases.value) > 1) {
+        listItemText += ` ${inputs.cases.value} cases`;
     }
-    if (cases.value && units.value !== "") {
+    if (inputs.cases.value && inputs.units.value !== "") {
         listItemText += ` and`;
     }
-    if (parseInt(units.value) === 1) {
-        listItemText += ` ${units.value} unit`;
-    } else if (parseInt(units.value) > 1) {
-        listItemText += ` ${units.value} units`;
+    if (parseInt(inputs.units.value) === 1) {
+        listItemText += ` ${inputs.units.value} unit`;
+    } else if (parseInt(inputs.units.value) > 1) {
+        listItemText += ` ${inputs.units.value} units`;
     }
     listedItem.innerHTML = listItemText;
 
@@ -408,24 +410,24 @@ function addItem() {
 }
 
 function inputToggles() {
-    if (companyField.value != "") {
-        brandField.removeAttribute("disabled");
-    } else if (companyField.value === "") {
-        brandField.setAttribute("disabled", "");
+    if (inputs.companyField.value != "") {
+        inputs.brandField.removeAttribute("disabled");
+    } else if (inputs.companyField.value === "") {
+        inputs.brandField.setAttribute("disabled", "");
     }
 
-    if (brandField.value != "") {
-        varietyField.removeAttribute("disabled");
-        flavorField.removeAttribute("disabled");
-        sizeField.removeAttribute("disabled");
-        cases.removeAttribute("disabled");
-        units.removeAttribute("disabled");
-    } else if (brandField.value === "") {
-        varietyField.setAttribute("disabled", "");
-        flavorField.setAttribute("disabled", "");
-        sizeField.setAttribute("disabled", "");
-        cases.setAttribute("disabled", "");
-        units.setAttribute("disabled", "");
+    if (inputs.brandField.value != "") {
+        inputs.varietyField.removeAttribute("disabled");
+        inputs.flavorField.removeAttribute("disabled");
+        inputs.sizeField.removeAttribute("disabled");
+        inputs.cases.removeAttribute("disabled");
+        inputs.units.removeAttribute("disabled");
+    } else if (inputs.brandField.value === "") {
+        inputs.varietyField.setAttribute("disabled", "");
+        inputs.flavorField.setAttribute("disabled", "");
+        inputs.sizeField.setAttribute("disabled", "");
+        inputs.cases.setAttribute("disabled", "");
+        inputs.units.setAttribute("disabled", "");
     }
 }
 
@@ -439,16 +441,16 @@ function resetList() {
 
 
 function removeChildren() {
-    let varietyFieldChildren = varietyField.children.length
-    let flavorFieldChildren = flavorField.children.length
-    let sizeFieldChildren = sizeField.children.length;
+    let varietyFieldChildren = inputs.varietyField.children.length
+    let flavorFieldChildren = inputs.flavorField.children.length
+    let sizeFieldChildren = inputs.sizeField.children.length;
     for (let i = 1; i < varietyFieldChildren; ++i) {
-        varietyField.removeChild(varietyField.lastChild);
+        inputs.varietyField.removeChild(inputs.varietyField.lastChild);
     }
     for (let i = 1; i < flavorFieldChildren; ++i) {
-        flavorField.removeChild(flavorField.lastChild);
+        inputs.flavorField.removeChild(inputs.flavorField.lastChild);
     }
     for (let i = 1; i < sizeFieldChildren; ++i) {
-        sizeField.removeChild(sizeField.lastChild);
+        inputs.sizeField.removeChild(inputs.sizeField.lastChild);
     }
 }
