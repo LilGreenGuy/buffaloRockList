@@ -418,7 +418,7 @@ function addItem() {
         editBox.placeholder = listItemCounts;
         listedItem.innerHTML = listItemText;
         listedItem.append(editBox);
-        editBox.addEventListener("blur", function() {
+        editBox.addEventListener("change", function() {
             listedItem.innerHTML = listItemText + this.value;
         })
     })
