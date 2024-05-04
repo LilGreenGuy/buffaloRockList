@@ -163,8 +163,8 @@ const keurigDrPepper = [
     {
         brand: "Sunkist",
         variety: ["Original", "Zero"],
-        flavor: ["Berry Lemonade", "Cherry Limeade", "Fruit Punch", "Orange", "Peach", "Strawberry", 
-        "Strawberry Orange", "Watermelon Lemonade"],
+        flavor: ["Berry Lemonade", "Cherry Limeade", "Fruit Punch", "Orange", "Peach", "Strawberry",
+            "Strawberry Orange", "Watermelon Lemonade"],
         size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "8pk", "10pk", "12pk", "24pk"]
     },
     {
@@ -414,16 +414,21 @@ function addItem() {
     editBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         const editBox = document.createElement("input");
+        editBox.name = "editBox";
         editBox.type = "text";
         editBox.placeholder = listItemCounts;
         listedItem.innerHTML = listItemText;
         listedItem.append(editBox);
-        editBox.addEventListener("change", function() {
+        editBox.focus()
+        editBox.addEventListener("blur", function () {
+            listedItem.innerHTML = listItemText + listItemCounts;
+        })
+        editBox.addEventListener("change", function () {
             listedItem.innerHTML = listItemText + this.value;
         })
     })
 
-    deleteBtn.addEventListener("click", function(e) {
+    deleteBtn.addEventListener("click", function (e) {
         e.stopPropagation();
         fillItem.remove()
     })
@@ -460,7 +465,8 @@ function resetList() {
 }
 
 
-function removeChildren() {;
+function removeChildren() {
+    ;
     let varietyFieldChildren = inputs.varietyField.children.length;
     let flavorFieldChildren = inputs.flavorField.children.length;
     let sizeFieldChildren = inputs.sizeField.children.length;
