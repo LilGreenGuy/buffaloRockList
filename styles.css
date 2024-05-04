@@ -190,15 +190,21 @@ h2 {
     scale: 0.9;
 }
 
-.deleteThis {
+.deleteThis,
+.editThis {
     border-radius: 100%;
     border: 1px solid rgb(37, 37, 161);
     font-size: 1rem;
     flex-shrink: 0;
-    height: 1.5rem;
+    height: 1.75rem;
     text-align: center;
-    width: 1.5rem;
+    width: 1.75rem;
     transition: all 0.2s;
+}
+
+.editThis {
+    color: goldenrod;
+    font-size: 1.25rem;
 }
 
 .deleteThis:hover {
@@ -208,7 +214,7 @@ scale: 0.9;
 .todo {
     align-items: center;
     display: flex;
-    gap: 10px;
+    gap: 5px;
     min-height: 50px;
     justify-content: space-between;
     padding: 5px 10px;
@@ -216,4 +222,10 @@ scale: 0.9;
 
 .todo:nth-child(odd) {
     background: #f6f6f6;
+}
+
+.buttonGroup {
+    align-items: center;
+    display: flex;
+    gap: 10px;
 }

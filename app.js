@@ -374,6 +374,7 @@ function addItem() {
         return parent.remove();
     }
     let listItemText = `<b>${inputs.brandField.value} `;
+    let listItemCounts = "";
     if (inputs.varietyField.value != "Original") {
         listItemText += `${inputs.varietyField.value} `;
     }
@@ -382,31 +383,55 @@ function addItem() {
     }
     listItemText += `${inputs.sizeField.value}</b> needs`;
     if (parseInt(inputs.cases.value) === 1) {
-        listItemText += ` ${inputs.cases.value} case`;
+        listItemCounts += ` ${inputs.cases.value} case`;
     } else if (parseInt(inputs.cases.value) > 1) {
-        listItemText += ` ${inputs.cases.value} cases`;
+        listItemCounts += ` ${inputs.cases.value} cases`;
     }
     if (inputs.cases.value && inputs.units.value !== "") {
-        listItemText += ` and`;
+        listItemCounts += ` and`;
     }
     if (parseInt(inputs.units.value) === 1) {
-        listItemText += ` ${inputs.units.value} unit`;
+        listItemCounts += ` ${inputs.units.value} unit`;
     } else if (parseInt(inputs.units.value) > 1) {
-        listItemText += ` ${inputs.units.value} units`;
+        listItemCounts += ` ${inputs.units.value} units`;
     }
-    listedItem.innerHTML = listItemText;
+    listedItem.innerHTML = listItemText + listItemCounts;
+
+    const buttonGroup = document.createElement("span");
+    buttonGroup.classList.add("buttonGroup");
+    fillItem.append(buttonGroup);
+
+    const editBtn = document.createElement("button");
+    editBtn.classList.add("editThis");
+    editBtn.innerHTML = "&#9998";
+    buttonGroup.append(editBtn);
 
     const deleteBtn = document.createElement("button");
     deleteBtn.classList.add("deleteThis");
     deleteBtn.innerHTML = "&#10060";
-    fillItem.append(deleteBtn);
+    buttonGroup.append(deleteBtn);
 
     function deleteItem() {
         const parent = deleteBtn.parentNode;
         parent.remove();
     }
 
-    deleteBtn.onclick = () => deleteItem();
+    editBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const editBox = document.createElement("input");
+        editBox.type = "text";
+        editBox.placeholder = listItemCounts;
+        listedItem.innerHTML = listItemText;
+        listedItem.append(editBox);
+        editBox.addEventListener("blur", function() {
+            listedItem.innerHTML = listItemText + " " + this.value;
+        })
+    })
+
+    deleteBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        deleteItem();
+    })
 }
 
 function inputToggles() {
@@ -440,9 +465,9 @@ function resetList() {
 }
 
 
-function removeChildren() {
-    let varietyFieldChildren = inputs.varietyField.children.length
-    let flavorFieldChildren = inputs.flavorField.children.length
+function removeChildren() {;
+    let varietyFieldChildren = inputs.varietyField.children.length;
+    let flavorFieldChildren = inputs.flavorField.children.length;
     let sizeFieldChildren = inputs.sizeField.children.length;
     for (let i = 1; i < varietyFieldChildren; ++i) {
         inputs.varietyField.removeChild(inputs.varietyField.lastChild);
@@ -453,4 +478,6 @@ function removeChildren() {
     for (let i = 1; i < sizeFieldChildren; ++i) {
         inputs.sizeField.removeChild(inputs.sizeField.lastChild);
     }
+    inputs.cases.value = "";
+    inputs.units.value = "";
 }
