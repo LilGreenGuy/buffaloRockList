@@ -381,11 +381,11 @@ function addItem() {
     if (inputs.flavorField.value !== "None") {
         listItemText += `${inputs.flavorField.value} `;
     }
-    listItemText += `${inputs.sizeField.value}</b> needs`;
+    listItemText += `${inputs.sizeField.value}</b> needs `;
     if (parseInt(inputs.cases.value) === 1) {
-        listItemCounts += ` ${inputs.cases.value} case`;
+        listItemCounts += `${inputs.cases.value} case`;
     } else if (parseInt(inputs.cases.value) > 1) {
-        listItemCounts += ` ${inputs.cases.value} cases`;
+        listItemCounts += `${inputs.cases.value} cases`;
     }
     if (inputs.cases.value && inputs.units.value !== "") {
         listItemCounts += ` and`;
@@ -411,11 +411,6 @@ function addItem() {
     deleteBtn.innerHTML = "&#10060";
     buttonGroup.append(deleteBtn);
 
-    function deleteItem() {
-        const parent = deleteBtn.parentNode;
-        parent.remove();
-    }
-
     editBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         const editBox = document.createElement("input");
@@ -424,13 +419,13 @@ function addItem() {
         listedItem.innerHTML = listItemText;
         listedItem.append(editBox);
         editBox.addEventListener("blur", function() {
-            listedItem.innerHTML = listItemText + " " + this.value;
+            listedItem.innerHTML = listItemText + this.value;
         })
     })
 
-    deleteBtn.addEventListener("click", (e) => {
+    deleteBtn.addEventListener("click", function(e) {
         e.stopPropagation();
-        deleteItem();
+        fillItem.remove()
     })
 }
 
