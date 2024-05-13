@@ -193,7 +193,7 @@ const buffaloRock = [
         brand: "Grapico",
         variety: ["Original", "Diet"],
         flavor: ["None"],
-        size: ["20oz", "2LT", "6pk-16oz", "12pk"]
+        size: ["20oz", "2LT", "6pk-16oz", "8pk", "12pk"]
     },
     {
         brand: "Sundrop",
@@ -203,7 +203,7 @@ const buffaloRock = [
     },
     {
         brand: "Sunfresh",
-        variety: ["Original", "Diet"],
+        variety: ["Original"],
         flavor: ["None"],
         size: ["20oz", "2LT", "12pk"]
     }
@@ -275,7 +275,9 @@ inputs.cases.addEventListener("click", () => emptyField(inputs.cases));
 inputs.units.addEventListener("click", () => emptyField(inputs.units));
 inputs.companyField.addEventListener("change", () => createBrands(inputs.companyField.value));
 inputs.brandField.addEventListener("change", () => createSubFields(inputs.companyField.value));
-inputs.resetBtn.addEventListener("click", () => resetList());
+inputs.resetBtn.addEventListener("click", () => {
+    resetList()
+});
 
 function createBrands(value) {
     if (inputs.brandField.value !== "") {
@@ -419,7 +421,7 @@ function addItem() {
         editBox.placeholder = listItemCounts;
         listedItem.innerHTML = listItemText;
         listedItem.append(editBox);
-        editBox.focus()
+        editBox.focus();
         editBox.addEventListener("blur", function () {
             listedItem.innerHTML = listItemText + listItemCounts;
         })
@@ -430,8 +432,11 @@ function addItem() {
 
     deleteBtn.addEventListener("click", function (e) {
         e.stopPropagation();
-        fillItem.remove()
-    })
+        fillItem.style.opacity = "0";
+        setTimeout(() => {
+            fillItem.remove();
+        }, 500);
+    });
 }
 
 function inputToggles() {

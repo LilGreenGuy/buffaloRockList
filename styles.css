@@ -218,6 +218,7 @@ scale: 0.9;
     min-height: 50px;
     justify-content: space-between;
     padding: 5px 10px;
+    transition: all 0.5s;
 }
 
 .todo:nth-child(odd) {
