@@ -157,7 +157,7 @@ const keurigDrPepper = [
     {
         brand: "Snapple",
         variety: ["Original"],
-        flavor: ["Apple", "Fruit Punch", "Kiwi Strawberry"],
+        flavor: ["Apple", "Fruit Punch", "Kiwi Strawberry", "Peach", "Watermelon Lemonade"],
         size: ["16oz", "6pk", "12pk"]
     },
     {
@@ -276,7 +276,7 @@ inputs.units.addEventListener("click", () => emptyField(inputs.units));
 inputs.companyField.addEventListener("change", () => createBrands(inputs.companyField.value));
 inputs.brandField.addEventListener("change", () => createSubFields(inputs.companyField.value));
 inputs.resetBtn.addEventListener("click", () => {
-    resetList()
+    resetList();
 });
 
 function createBrands(value) {
@@ -467,6 +467,8 @@ function emptyField(element) {
 
 function resetList() {
     listTable.innerHTML = "";
+    inputs.cases.value = "";
+    inputs.units.value = "";
 }
 
 
