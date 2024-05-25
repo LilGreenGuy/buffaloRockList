@@ -262,22 +262,42 @@ const inputs = {
     submitBtn: inputForm.elements.add,
     resetBtn: inputForm.elements.reset
 };
+
 const listTable = document.querySelector(".table");
 
-inputForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-});
-inputs.submitBtn.addEventListener("click", () => {
-    addItem();
-    inputs.submitBtn.blur();
-})
-inputs.cases.addEventListener("click", () => emptyField(inputs.cases));
-inputs.units.addEventListener("click", () => emptyField(inputs.units));
-inputs.companyField.addEventListener("change", () => createBrands(inputs.companyField.value));
-inputs.brandField.addEventListener("change", () => createSubFields(inputs.companyField.value));
-inputs.resetBtn.addEventListener("click", () => {
-    resetList();
-});
+const eventListeners = [
+    inputForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        e.blur();
+    }),
+
+    inputs.submitBtn.addEventListener("click", function () {
+        addItem();
+        this.blur();
+    }),
+    inputs.cases.addEventListener("click", () => emptyField(inputs.cases)),
+    inputs.units.addEventListener("click", () => emptyField(inputs.units)),
+    inputs.companyField.addEventListener("change", function () {
+        createBrands(inputs.companyField.value);
+        this.blur();
+    }),
+    inputs.brandField.addEventListener("change", function () {
+        createSubFields(inputs.companyField.value)
+        this.blur();
+    }),
+    inputs.varietyField.addEventListener("change", function () {
+        this.blur();
+    }),
+    inputs.flavorField.addEventListener("change", function () {
+        this.blur();
+    }),
+    inputs.sizeField.addEventListener("change", function () {
+        this.blur();
+    }),
+    inputs.resetBtn.addEventListener("click", () => {
+        resetList();
+    })
+];
 
 function createBrands(value) {
     if (inputs.brandField.value !== "") {
@@ -327,29 +347,33 @@ function createSubFields(value) {
 
     inputToggles();
 
+    function createSubFields(object, property, index) {
+        const inputOption = document.createElement("option");
+        inputOption.innerText = `${property[index]}`;
+        object.append(inputOption);
+    }
+
+    // function createFieldsLoop(loopObject) {
+        
+    // }
+
     function createFields(objects) {
-        removeChildren()
-        for (i = 0; i < objects.length; i++) {
+        removeChildren();
+        for (let i = 0; i < objects.length; i++) {
             if (inputs.brandField.value === objects[i].brand) {
                 let brandSelected = objects[i];
-                for (j = 0; j < brandSelected.variety.length; j++) {
-                    const varietyOption = document.createElement("option");
-                    varietyOption.innerText = `${brandSelected.variety[j]}`;
-                    inputs.varietyField.append(varietyOption);
+                for (let j = 0; j < brandSelected.variety.length; j++) {
+                    createSubFields(inputs.varietyField, brandSelected.variety, j);
                 }
                 const varietyArray = document.querySelectorAll("#variety option");
                 varietyArray[1].setAttribute("selected", "");
-                for (j = 0; j < brandSelected.flavor.length; j++) {
-                    const flavorOption = document.createElement("option");
-                    flavorOption.innerText = `${brandSelected.flavor[j]}`;
-                    inputs.flavorField.append(flavorOption);
+                for (let j = 0; j < brandSelected.flavor.length; j++) {
+                    createSubFields(inputs.flavorField, brandSelected.flavor, j);
                 }
                 const flavorArray = document.querySelectorAll("#flavor option");
                 flavorArray[1].setAttribute("selected", "");
-                for (j = 0; j < brandSelected.size.length; j++) {
-                    const sizeOption = document.createElement("option");
-                    sizeOption.innerText = `${brandSelected.size[j]}`;
-                    inputs.sizeField.append(sizeOption);
+                for (let j = 0; j < brandSelected.size.length; j++) {
+                    createSubFields(inputs.sizeField, brandSelected.size, j);
                 }
                 const sizeArray = document.querySelectorAll("#size option");
                 sizeArray[1].setAttribute("selected", "");
@@ -447,11 +471,9 @@ function inputToggles() {
     }
 
     if (inputs.brandField.value != "") {
-        inputs.varietyField.removeAttribute("disabled");
-        inputs.flavorField.removeAttribute("disabled");
-        inputs.sizeField.removeAttribute("disabled");
-        inputs.cases.removeAttribute("disabled");
-        inputs.units.removeAttribute("disabled");
+        for (let prop in inputs) {
+            inputs[prop].removeAttribute("disabled");
+        }
     } else if (inputs.brandField.value === "") {
         inputs.varietyField.setAttribute("disabled", "");
         inputs.flavorField.setAttribute("disabled", "");
