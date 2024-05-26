@@ -268,7 +268,7 @@ const listTable = document.querySelector(".table");
 const eventListeners = [
     inputForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        e.blur();
+        this.blur();
     }),
 
     inputs.submitBtn.addEventListener("click", function () {
@@ -282,7 +282,7 @@ const eventListeners = [
         this.blur();
     }),
     inputs.brandField.addEventListener("change", function () {
-        createSubFields(inputs.companyField.value)
+        createInputFields(inputs.companyField.value)
         this.blur();
     }),
     inputs.varietyField.addEventListener("change", function () {
@@ -299,7 +299,7 @@ const eventListeners = [
     })
 ];
 
-function createBrands(value) {
+function createBrands(parentCompany) {
     if (inputs.brandField.value !== "") {
         removeChildren();
     }
@@ -308,18 +308,18 @@ function createBrands(value) {
         inputs.brandField.removeChild(inputs.brandField.lastChild);
     }
 
-    if (value === "Buffalo Rock") {
+    if (parentCompany === "Buffalo Rock") {
         createBrandFields(buffaloRock);
-    } else if (value === "Celsius") {
+    } else if (parentCompany === "Celsius") {
         createBrandFields(celsius);
-    } else if (value === "Lipton Teas") {
+    } else if (parentCompany === "Lipton Teas") {
         createBrandFields(lipton);
-    } else if (value === "Keurig Dr. Pepper") {
+    } else if (parentCompany === "Keurig Dr. Pepper") {
         createBrandFields(keurigDrPepper);
-    } else if (value === "Pepsi Co") {
+    } else if (parentCompany === "Pepsi Co") {
         createBrandFields(pepsiCo);
     }
-    inputToggles()
+    inputToggles();
 }
 
 function createBrandFields(objects) {
@@ -331,52 +331,54 @@ function createBrandFields(objects) {
     }
 }
 
-function createSubFields(value) {
+function createInputFields(parentCompany) {
 
-    if (value === "Buffalo Rock") {
+    if (parentCompany === "Buffalo Rock") {
         createFields(buffaloRock);
-    } else if (value === "Celsius") {
+    } else if (parentCompany === "Celsius") {
         createFields(celsius);
-    } else if (value === "Lipton Teas") {
+    } else if (parentCompany === "Lipton Teas") {
         createFields(lipton);
-    } else if (value === "Keurig Dr. Pepper") {
+    } else if (parentCompany === "Keurig Dr. Pepper") {
         createFields(keurigDrPepper);
-    } else if (value === "Pepsi Co") {
+    } else if (parentCompany === "Pepsi Co") {
         createFields(pepsiCo);
     }
 
     inputToggles();
 
-    function createSubFields(object, property, index) {
+    function createSubFields(object, property) {
         const inputOption = document.createElement("option");
-        inputOption.innerText = `${property[index]}`;
+        inputOption.innerText = `${property}`;
         object.append(inputOption);
     }
 
-    // function createFieldsLoop(loopObject) {
-        
+    // function createFieldsLoop(object) {
     // }
 
-    function createFields(objects) {
+    function selectFirstOption(string) {
+        const inputArray = document.querySelectorAll(`${string} option`);
+        inputArray[1].setAttribute("selected", "");
+    }
+
+    function createFields(company) {
         removeChildren();
-        for (let i = 0; i < objects.length; i++) {
-            if (inputs.brandField.value === objects[i].brand) {
-                let brandSelected = objects[i];
-                for (let j = 0; j < brandSelected.variety.length; j++) {
-                    createSubFields(inputs.varietyField, brandSelected.variety, j);
+        for (const brandObject of company) {
+            if (inputs.brandField.value === brandObject.brand) {
+                for (const obj of brandObject.variety) {
+                    createSubFields(inputs.varietyField, obj)
                 }
-                const varietyArray = document.querySelectorAll("#variety option");
-                varietyArray[1].setAttribute("selected", "");
-                for (let j = 0; j < brandSelected.flavor.length; j++) {
-                    createSubFields(inputs.flavorField, brandSelected.flavor, j);
+                selectFirstOption('#variety');
+
+                for (const obj of brandObject.flavor) {
+                    createSubFields(inputs.flavorField, obj)
                 }
-                const flavorArray = document.querySelectorAll("#flavor option");
-                flavorArray[1].setAttribute("selected", "");
-                for (let j = 0; j < brandSelected.size.length; j++) {
-                    createSubFields(inputs.sizeField, brandSelected.size, j);
+                selectFirstOption('#flavor');
+
+                for (const obj of brandObject.size) {
+                    createSubFields(inputs.sizeField, obj)
                 }
-                const sizeArray = document.querySelectorAll("#size option");
-                sizeArray[1].setAttribute("selected", "");
+                selectFirstOption('#size');
             }
         }
     }
@@ -440,12 +442,12 @@ function addItem() {
     editBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         const editBox = document.createElement("input");
+        editBox.focus();
         editBox.name = "editBox";
         editBox.type = "text";
         editBox.placeholder = listItemCounts;
         listedItem.innerHTML = listItemText;
         listedItem.append(editBox);
-        editBox.focus();
         editBox.addEventListener("blur", function () {
             listedItem.innerHTML = listItemText + listItemCounts;
         })

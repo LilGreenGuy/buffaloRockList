@@ -196,9 +196,9 @@ h2 {
     border: 1px solid rgb(37, 37, 161);
     font-size: 1rem;
     flex-shrink: 0;
-    height: 1.75rem;
+    height: 2rem;
     text-align: center;
-    width: 1.75rem;
+    width: 2rem;
     transition: all 0.2s;
 }
 
