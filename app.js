@@ -269,8 +269,10 @@ const eventListeners = [
     inputForm.addEventListener("submit", function (e) {
         e.preventDefault();
         this.blur();
+    }), 
+    window.addEventListener("click", function (e) {
+        e.target.focus();
     }),
-
     inputs.submitBtn.addEventListener("click", function () {
         addItem();
         this.blur();
@@ -353,11 +355,21 @@ function createInputFields(parentCompany) {
         object.append(inputOption);
     }
 
-    // function createFieldsLoop(object) {
-    // }
+    function createFieldsLoop(object, brandObject) {
+        for (const obj of object) {
+            if(object === brandObject.variety){
+            createSubFields(inputs.varietyField, obj);
+            } else if(object === brandObject.flavor) {
+                createSubFields(inputs.flavorField, obj);
+            } else {
+                createSubFields(inputs.sizeField, obj);
+            }
+        }
+    }
 
     function selectFirstOption(string) {
         const inputArray = document.querySelectorAll(`${string} option`);
+        console.log(string, inputArray)
         inputArray[1].setAttribute("selected", "");
     }
 
@@ -365,19 +377,15 @@ function createInputFields(parentCompany) {
         removeChildren();
         for (const brandObject of company) {
             if (inputs.brandField.value === brandObject.brand) {
-                for (const obj of brandObject.variety) {
-                    createSubFields(inputs.varietyField, obj)
+                for (const obj in brandObject) {
+                    console.log(obj)
+                    // selectFirstOption(obj);
                 }
+                createFieldsLoop(brandObject.variety, brandObject);
                 selectFirstOption('#variety');
-
-                for (const obj of brandObject.flavor) {
-                    createSubFields(inputs.flavorField, obj)
-                }
+                createFieldsLoop(brandObject.flavor, brandObject);
                 selectFirstOption('#flavor');
-
-                for (const obj of brandObject.size) {
-                    createSubFields(inputs.sizeField, obj)
-                }
+                createFieldsLoop(brandObject.size, brandObject);
                 selectFirstOption('#size');
             }
         }
