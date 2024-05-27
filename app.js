@@ -269,7 +269,7 @@ const eventListeners = [
     inputForm.addEventListener("submit", function (e) {
         e.preventDefault();
         this.blur();
-    }), 
+    }),
     window.addEventListener("click", function (e) {
         e.target.focus();
     }),
@@ -324,11 +324,11 @@ function createBrands(parentCompany) {
     inputToggles();
 }
 
-function createBrandFields(objects) {
+function createBrandFields(parentCompany) {
 
-    for (let obj of objects) {
+    for (let brand of parentCompany) {
         const brandOption = document.createElement("option");
-        brandOption.innerText = `${obj.brand}`;
+        brandOption.innerText = `${brand.brand}`;
         inputs.brandField.append(brandOption);
     }
 }
@@ -357,9 +357,9 @@ function createInputFields(parentCompany) {
 
     function createFieldsLoop(object, brandObject) {
         for (const obj of object) {
-            if(object === brandObject.variety){
-            createSubFields(inputs.varietyField, obj);
-            } else if(object === brandObject.flavor) {
+            if (object === brandObject.variety) {
+                createSubFields(inputs.varietyField, obj);
+            } else if (object === brandObject.flavor) {
                 createSubFields(inputs.flavorField, obj);
             } else {
                 createSubFields(inputs.sizeField, obj);
@@ -369,7 +369,6 @@ function createInputFields(parentCompany) {
 
     function selectFirstOption(string) {
         const inputArray = document.querySelectorAll(`${string} option`);
-        console.log(string, inputArray)
         inputArray[1].setAttribute("selected", "");
     }
 
@@ -377,10 +376,6 @@ function createInputFields(parentCompany) {
         removeChildren();
         for (const brandObject of company) {
             if (inputs.brandField.value === brandObject.brand) {
-                for (const obj in brandObject) {
-                    console.log(obj)
-                    // selectFirstOption(obj);
-                }
                 createFieldsLoop(brandObject.variety, brandObject);
                 selectFirstOption('#variety');
                 createFieldsLoop(brandObject.flavor, brandObject);
@@ -458,11 +453,11 @@ function addItem() {
         listedItem.append(editBox);
         editBox.addEventListener("blur", function () {
             listedItem.innerHTML = listItemText + listItemCounts;
-        })
+        });
         editBox.addEventListener("change", function () {
             listedItem.innerHTML = listItemText + this.value;
-        })
-    })
+        });
+    });
 
     deleteBtn.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -485,11 +480,10 @@ function inputToggles() {
             inputs[prop].removeAttribute("disabled");
         }
     } else if (inputs.brandField.value === "") {
-        inputs.varietyField.setAttribute("disabled", "");
-        inputs.flavorField.setAttribute("disabled", "");
-        inputs.sizeField.setAttribute("disabled", "");
-        inputs.cases.setAttribute("disabled", "");
-        inputs.units.setAttribute("disabled", "");
+        const { companyField, brandField, ...remainingInputs } = inputs
+        for (let prop in remainingInputs) {
+            remainingInputs[prop].setAttribute("disabled", "")
+        }
     }
 }
 
@@ -503,21 +497,19 @@ function resetList() {
     inputs.units.value = "";
 }
 
-
 function removeChildren() {
-    ;
     let varietyFieldChildren = inputs.varietyField.children.length;
     let flavorFieldChildren = inputs.flavorField.children.length;
     let sizeFieldChildren = inputs.sizeField.children.length;
-    for (let i = 1; i < varietyFieldChildren; ++i) {
-        inputs.varietyField.removeChild(inputs.varietyField.lastChild);
-    }
-    for (let i = 1; i < flavorFieldChildren; ++i) {
-        inputs.flavorField.removeChild(inputs.flavorField.lastChild);
-    }
-    for (let i = 1; i < sizeFieldChildren; ++i) {
-        inputs.sizeField.removeChild(inputs.sizeField.lastChild);
-    }
+    removeKidsLoop(varietyFieldChildren, inputs.varietyField);
+    removeKidsLoop(flavorFieldChildren, inputs.flavorField);
+    removeKidsLoop(sizeFieldChildren, inputs.sizeField);
     inputs.cases.value = "";
     inputs.units.value = "";
+
+    function removeKidsLoop(children, field) {
+        for (let i = 1; i < children; ++i) {
+            field.removeChild(field.lastChild);
+        }
+    }
 }
