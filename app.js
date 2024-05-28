@@ -368,7 +368,7 @@ function createInputFields(parentCompany) {
     }
 
     function selectFirstOption(string) {
-        const inputArray = document.querySelectorAll(`${string} option`);
+        const inputArray = document.querySelectorAll(`#${string} option`);
         inputArray[1].setAttribute("selected", "");
     }
 
@@ -376,12 +376,13 @@ function createInputFields(parentCompany) {
         removeChildren();
         for (const brandObject of company) {
             if (inputs.brandField.value === brandObject.brand) {
-                createFieldsLoop(brandObject.variety, brandObject);
-                selectFirstOption('#variety');
-                createFieldsLoop(brandObject.flavor, brandObject);
-                selectFirstOption('#flavor');
-                createFieldsLoop(brandObject.size, brandObject);
-                selectFirstOption('#size');
+                for (let brand in brandObject) {
+                    if(brandObject[brand] === brandObject.brand) {
+                        continue
+                    }
+                    createFieldsLoop(brandObject[brand], brandObject);
+                    selectFirstOption(brand);
+                }
             }
         }
     }
@@ -498,14 +499,18 @@ function resetList() {
 }
 
 function removeChildren() {
-    let varietyFieldChildren = inputs.varietyField.children.length;
-    let flavorFieldChildren = inputs.flavorField.children.length;
-    let sizeFieldChildren = inputs.sizeField.children.length;
-    removeKidsLoop(varietyFieldChildren, inputs.varietyField);
-    removeKidsLoop(flavorFieldChildren, inputs.flavorField);
-    removeKidsLoop(sizeFieldChildren, inputs.sizeField);
     inputs.cases.value = "";
     inputs.units.value = "";
+
+    for (let input in inputs) {
+        if (inputs[input] !== inputs.varietyField && inputs[input]
+            !== inputs.flavorField && inputs[input]
+            !== inputs.sizeField) {
+            continue;
+        }
+        const inputFieldLength = inputs[input].children.length;
+        removeKidsLoop(inputFieldLength, inputs[input]);
+    }
 
     function removeKidsLoop(children, field) {
         for (let i = 1; i < children; ++i) {
