@@ -276,6 +276,7 @@ const eventListeners = [
     inputs.submitBtn.addEventListener("click", function () {
         addItem();
         this.blur();
+        emptyFillFields();
     }),
     inputs.cases.addEventListener("click", () => emptyField(inputs.cases)),
     inputs.units.addEventListener("click", () => emptyField(inputs.units)),
@@ -305,6 +306,7 @@ function createBrands(parentCompany) {
     if (inputs.brandField.value !== "") {
         removeChildren();
     }
+
     let brandFieldChildren = inputs.brandField.children.length;
     for (let i = 1; i < brandFieldChildren; ++i) {
         inputs.brandField.removeChild(inputs.brandField.lastChild);
@@ -377,8 +379,8 @@ function createInputFields(parentCompany) {
         for (const brandObject of company) {
             if (inputs.brandField.value === brandObject.brand) {
                 for (let brand in brandObject) {
-                    if(brandObject[brand] === brandObject.brand) {
-                        continue
+                    if (brandObject[brand] === brandObject.brand) {
+                        continue;
                     }
                     createFieldsLoop(brandObject[brand], brandObject);
                     selectFirstOption(brand);
@@ -446,14 +448,21 @@ function addItem() {
     editBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         const editBox = document.createElement("input");
-        editBox.focus();
+        editBox.classList.add("editBox")
         editBox.name = "editBox";
         editBox.type = "text";
         editBox.placeholder = listItemCounts;
         listedItem.innerHTML = listItemText;
         listedItem.append(editBox);
+        editBox.focus();
         editBox.addEventListener("blur", function () {
-            listedItem.innerHTML = listItemText + listItemCounts;
+            console.log(this.value)
+            console.log(typeof(this.value))
+            if (this.value === "") {
+                listedItem.innerHTML = listItemText + listItemCounts;
+            } else {
+                listedItem.innerHTML = listItemText + this.value;
+            }
         });
         editBox.addEventListener("change", function () {
             listedItem.innerHTML = listItemText + this.value;
@@ -494,13 +503,10 @@ function emptyField(element) {
 
 function resetList() {
     listTable.innerHTML = "";
-    inputs.cases.value = "";
-    inputs.units.value = "";
+    emptyFillFields();
 }
 
 function removeChildren() {
-    inputs.cases.value = "";
-    inputs.units.value = "";
 
     for (let input in inputs) {
         if (inputs[input] !== inputs.varietyField && inputs[input]
@@ -517,4 +523,9 @@ function removeChildren() {
             field.removeChild(field.lastChild);
         }
     }
+}
+
+function emptyFillFields() {
+    inputs.cases.value = "";
+    inputs.units.value = "";
 }
