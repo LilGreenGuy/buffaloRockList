@@ -24,7 +24,6 @@ const eventListeners = [
     inputs.submitBtn.addEventListener("click", function () {
         addItem();
         this.blur();
-        emptyFillFields();
     }),
     inputs.cases.addEventListener("click", () => emptyField(inputs.cases)),
     inputs.units.addEventListener("click", () => emptyField(inputs.units)),
@@ -224,6 +223,7 @@ function addItem() {
             fillItem.remove();
         }, 500);
     });
+    emptyFillFields();
 }
 
 function inputToggles() {
