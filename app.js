@@ -178,6 +178,21 @@ function addItem() {
     }
     listedItem.innerHTML = listItemText + listItemCounts;
 
+    function createNotification() {
+        const feedback = document.createElement("p");
+        feedback.classList.add("feedback")
+        const listItemSliced = listItemText.slice(0, -6);
+        feedback.innerHTML = `${listItemSliced} added to list.`;
+        listTable.append(feedback);
+        setTimeout(() => {
+            feedback.style.opacity = "1"
+            setTimeout(() => {
+                setTimeout(() => feedback.remove(), 500)
+                feedback.style.opacity = "0"
+            }, 1250)
+        }, 100)
+    }
+
     const buttonGroup = document.createElement("span");
     buttonGroup.classList.add("buttonGroup");
     fillItem.append(buttonGroup);
@@ -204,7 +219,7 @@ function addItem() {
         editBox.focus();
         editBox.addEventListener("blur", function () {
             console.log(this.value)
-            console.log(typeof(this.value))
+            console.log(typeof (this.value))
             if (this.value === "") {
                 listedItem.innerHTML = listItemText + listItemCounts;
             } else {
@@ -223,6 +238,7 @@ function addItem() {
             fillItem.remove();
         }, 500);
     });
+    createNotification()
     emptyFillFields();
 }
 

@@ -97,9 +97,12 @@ body {
 }
 
 #footer {
+    background-color: #f6f6f6;
+    bottom: 0px;
     font-size: 0.9rem;
     height: 2.5rem;
     padding-top: 0.5rem;
+    position: sticky;
     text-align: center;
     width: 100%;
 }
@@ -130,6 +133,8 @@ h2 {
 .beverageInputs {
     background: #f6f6f6;
     padding: 10px 0;
+    position: sticky;
+    top: 0px;
 }
 
 .inputs {
@@ -207,8 +212,28 @@ h2 {
     font-size: 1.25rem;
 }
 
+.editBox {
+    border-radius: 0.5rem;
+    background-color: #004b93;
+    color: #fff;
+    padding: 5px;
+}
+
+.feedback {
+    background-color: #b3b3b3;
+    bottom: 5rem;
+    font-size: 0.7rem;
+    padding: .25rem;
+    position: absolute;
+    opacity: 0;
+    text-align: center;
+    transition: all 250ms;
+    width: 100%;
+
+}
+
 .deleteThis:hover {
-scale: 0.9;
+    scale: 0.9;
 }
 
 .todo {

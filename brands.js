@@ -39,7 +39,7 @@ const pepsiCo = [
     {
         brand: "Pepsi",
         variety: ["Original", "Diet", "Zero"],
-        flavor: ["None", "Caffeine Free", "Lime", "Peach", "Wild Cherry"],
+        flavor: ["None", "Caffeine Free", "Lime", "Peach", "Real Sugar", "Wild Cherry"],
         size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "8pk", "10pk", "12pk", "24pk"]
     },
     {
@@ -67,6 +67,8 @@ const pepsiCo = [
         size: ["20oz", "6pk-10oz", "6pk-16oz", "10pk", "12pk"]
     }
 ]
+
+
 
 const keurigDrPepper = [
     {
