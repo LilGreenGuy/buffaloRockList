@@ -16,33 +16,20 @@ const listTable = document.querySelector(".table");
 const eventListeners = [
     inputForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        this.blur();
     }),
     window.addEventListener("click", function (e) {
         e.target.focus();
     }),
     inputs.submitBtn.addEventListener("click", function () {
         addItem();
-        this.blur();
     }),
     inputs.cases.addEventListener("click", () => emptyField(inputs.cases)),
     inputs.units.addEventListener("click", () => emptyField(inputs.units)),
     inputs.companyField.addEventListener("change", function () {
         createBrands(inputs.companyField.value);
-        this.blur();
     }),
     inputs.brandField.addEventListener("change", function () {
-        createInputFields(inputs.companyField.value)
-        this.blur();
-    }),
-    inputs.varietyField.addEventListener("change", function () {
-        this.blur();
-    }),
-    inputs.flavorField.addEventListener("change", function () {
-        this.blur();
-    }),
-    inputs.sizeField.addEventListener("change", function () {
-        this.blur();
+        createInputFields(inputs.companyField.value);
     }),
     inputs.resetBtn.addEventListener("click", () => {
         resetList();
@@ -75,9 +62,9 @@ function createBrands(parentCompany) {
 
 function createBrandFields(parentCompany) {
 
-    for (let brand of parentCompany) {
+    for (let brandObj of parentCompany) {
         const brandOption = document.createElement("option");
-        brandOption.innerText = `${brand.brand}`;
+        brandOption.innerText = `${brandObj.brand}`;
         inputs.brandField.append(brandOption);
     }
 }
@@ -98,26 +85,34 @@ function createInputFields(parentCompany) {
 
     inputToggles();
 
-    function createSubFields(object, property) {
+    function createOptions(inputField, string) {
         const inputOption = document.createElement("option");
-        inputOption.innerText = `${property}`;
-        object.append(inputOption);
+        // Uses the passed through option/string from the array in the calling function to 
+        // Print the string's text into the element.
+        inputOption.innerText = `${string}`;
+        inputField.append(inputOption);
     }
 
-    function createFieldsLoop(object, brandObject) {
-        for (const obj of object) {
-            if (object === brandObject.variety) {
-                createSubFields(inputs.varietyField, obj);
-            } else if (object === brandObject.flavor) {
-                createSubFields(inputs.flavorField, obj);
+    function createFieldsLoop(fieldArray, brandObject) {
+        // Loops over the passed through array
+        for (const fieldOption of fieldArray) {
+            // Uses the passed through array and brand object from the calling function to check
+            // if the array matches the selected option and then passes through the array strings
+            // The if logic is to determine which field's array is being iterated.
+            if (fieldArray === brandObject.variety) {
+                createOptions(inputs.varietyField, fieldOption);
+            } else if (fieldArray === brandObject.flavor) {
+                createOptions(inputs.flavorField, fieldOption);
             } else {
-                createSubFields(inputs.sizeField, obj);
+                createOptions(inputs.sizeField, fieldOption);
             }
         }
     }
 
     function selectFirstOption(string) {
+        //Selects all of the input key passed through to return as a nodelist
         const inputArray = document.querySelectorAll(`#${string} option`);
+        //Selects the second option in a given inpout using the index from the nodelist that returns from querySelectorAll
         inputArray[1].setAttribute("selected", "");
     }
 
@@ -125,10 +120,14 @@ function createInputFields(parentCompany) {
         removeChildren();
         for (const brandObject of company) {
             if (inputs.brandField.value === brandObject.brand) {
+                // Checks to see if the looped over brand object is the same as the one selected in the input
                 for (let brand in brandObject) {
                     if (brandObject[brand] === brandObject.brand) {
+                        //  Used to filter out the brand key value pairs so only the other three inputs are accessed
                         continue;
                     }
+                    console.log(brandObject[brand])
+                    // Sends the variety/flavor/size fields through via a loop so only one function call is required
                     createFieldsLoop(brandObject[brand], brandObject);
                     selectFirstOption(brand);
                 }
@@ -181,16 +180,15 @@ function addItem() {
     function createNotification() {
         const feedback = document.createElement("p");
         feedback.classList.add("feedback");
-        // const listItemSliced = listItemText.slice(0, -6);
         feedback.innerHTML = `${listItemText.slice(0, -6)} added to list.`;
         document.body.append(feedback);
         setTimeout(() => {
-            feedback.style.opacity = "1"
+            feedback.style.opacity = "1";
             setTimeout(() => {
-                setTimeout(() => feedback.remove(), 500)
-                feedback.style.opacity = "0"
-            }, 1250)
-        }, 100)
+                setTimeout(() => feedback.remove(), 500);
+                feedback.style.opacity = "0";
+            }, 1250);
+        }, 100);
     }
 
     const buttonGroup = document.createElement("span");
@@ -210,7 +208,7 @@ function addItem() {
     editBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         const editBox = document.createElement("input");
-        editBox.classList.add("editBox")
+        editBox.classList.add("editBox");
         editBox.name = "editBox";
         editBox.type = "text";
         editBox.placeholder = listItemCounts;
@@ -218,8 +216,6 @@ function addItem() {
         listedItem.append(editBox);
         editBox.focus();
         editBox.addEventListener("blur", function () {
-            console.log(this.value)
-            console.log(typeof (this.value))
             if (this.value === "") {
                 listedItem.innerHTML = listItemText + listItemCounts;
             } else {
@@ -238,7 +234,7 @@ function addItem() {
             fillItem.remove();
         }, 500);
     });
-    createNotification()
+    createNotification();
     emptyFillFields();
 }
 
@@ -250,13 +246,19 @@ function inputToggles() {
     }
 
     if (inputs.brandField.value != "") {
-        for (let prop in inputs) {
-            inputs[prop].removeAttribute("disabled");
+        // If the brand field input has a brand selected this will loop through the inputs and remove
+        // the disabled attribute to enable them.
+        for (let key in inputs) {
+            inputs[key].removeAttribute("disabled");
         }
     } else if (inputs.brandField.value === "") {
+        // Destructures the inputs object to pull out the key value pairs I really
+        // want to access.
         const { companyField, brandField, ...remainingInputs } = inputs
-        for (let prop in remainingInputs) {
-            remainingInputs[prop].setAttribute("disabled", "")
+        for (let key in remainingInputs) {
+            // Does the opposite of above. Adds disabled attribute to the input fields
+            // if the brand is left unselected
+            remainingInputs[key].setAttribute("disabled", "")
         }
     }
 }
@@ -272,17 +274,20 @@ function resetList() {
 
 function removeChildren() {
 
-    for (let input in inputs) {
-        if (inputs[input] !== inputs.varietyField && inputs[input]
-            !== inputs.flavorField && inputs[input]
-            !== inputs.sizeField) {
+    for (let key in inputs) {
+        // Loop through the inputs object to filter out the inputs that AREN'T
+        //  flavorField, varietyField, and sizeField
+        if (inputs[key] !== inputs.varietyField &&
+            inputs[key] !== inputs.flavorField &&
+            inputs[key] !== inputs.sizeField) {
             continue;
         }
-        const inputFieldLength = inputs[input].children.length;
-        removeKidsLoop(inputFieldLength, inputs[input]);
+        const inputFieldLength = inputs[key].children.length;
+        removeKidsLoop(inputFieldLength, inputs[key]);
     }
 
     function removeKidsLoop(children, field) {
+        //Removes all but the very first option in the select fields to return it to normal
         for (let i = 1; i < children; ++i) {
             field.removeChild(field.lastChild);
         }
