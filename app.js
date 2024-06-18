@@ -180,10 +180,10 @@ function addItem() {
 
     function createNotification() {
         const feedback = document.createElement("p");
-        feedback.classList.add("feedback")
-        const listItemSliced = listItemText.slice(0, -6);
-        feedback.innerHTML = `${listItemSliced} added to list.`;
-        listTable.append(feedback);
+        feedback.classList.add("feedback");
+        // const listItemSliced = listItemText.slice(0, -6);
+        feedback.innerHTML = `${listItemText.slice(0, -6)} added to list.`;
+        document.body.append(feedback);
         setTimeout(() => {
             feedback.style.opacity = "1"
             setTimeout(() => {

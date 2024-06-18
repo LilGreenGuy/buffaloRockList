@@ -139,6 +139,12 @@ const keurigDrPepper = [
         size: ["20oz", "2LT", "6pk-16oz", "12pk"]
     },
     {
+        brand: "Nehi",
+        variety: ["Original"],
+        flavor: ["None"],
+        size: ["20oz", "2LT", "6pk-16oz", "12pk"]
+    },
+    {
         brand: "RC Cola",
         variety: ["Original"],
         flavor: ["None", "Mixed Berry"],
