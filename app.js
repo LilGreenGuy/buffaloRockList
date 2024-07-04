@@ -137,18 +137,14 @@ function createInputFields(parentCompany) {
 }
 
 function addItem() {
-    const fillItem = document.createElement("div");
+    const fillItem = document.createElement("li");
     fillItem.classList.add("todo");
     listTable.append(fillItem);
 
     const listedItem = document.createElement("p");
     listedItem.classList.add("listItem");
     fillItem.append(listedItem);
-    if (inputs.brandField.value === ""
-        || inputs.flavorField.value === ""
-        || inputs.varietyField.value === ""
-        || inputs.sizeField.value === ""
-        || (inputs.cases.value === "0" || inputs.cases.value === "")
+    if ((inputs.cases.value === "0" || inputs.cases.value === "")
         && (inputs.units.value === "0" || inputs.units.value === "")) {
         const parent = listedItem.parentNode;
         return parent.remove();
@@ -200,11 +196,6 @@ function addItem() {
     editBtn.innerHTML = "&#9998";
     buttonGroup.append(editBtn);
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.classList.add("deleteThis");
-    deleteBtn.innerHTML = "&#10060";
-    buttonGroup.append(deleteBtn);
-
     editBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         const editBox = document.createElement("input");
@@ -227,6 +218,11 @@ function addItem() {
         });
     });
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("deleteThis");
+    deleteBtn.innerHTML = "&#10060";
+    buttonGroup.append(deleteBtn);
+
     deleteBtn.addEventListener("click", function (e) {
         e.stopPropagation();
         fillItem.style.opacity = "0";
@@ -234,6 +230,7 @@ function addItem() {
             fillItem.remove();
         }, 500);
     });
+    
     createNotification();
     emptyFillFields();
 }
