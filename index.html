@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <script defer src="./brands.js"></script>
-    <script defer src="./app.js"></script>
+    <script defer src="./app.js" type="module"></script>
     <link rel="stylesheet" href="./styles.css">
     <title>Buffalo Rock List App</title>
 </head>
@@ -23,7 +22,7 @@
 
         <form name="listSubmitForm" id="inputForm" class="beverageInputs" action="/">
             <div class="inputs">
-                <select name="parentCompany" id="parentCompany" class="inputFields" required>
+                <select name="parentCompany" id="parentCompany" class="inputFields" required autofocus>
                     <option value="">Parent Company:</option>
                     <option value="Buffalo Rock">Buffalo Rock</option>
                     <option value="Celsius">Celsius</option>

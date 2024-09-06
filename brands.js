@@ -15,7 +15,7 @@ const pepsiCo = [
         brand: "Gatorade",
         variety: ["Original", "Zero", "Fast Twitch", "Fit", "Lyte"],
         flavor: ["Cool Blue", "Cucumber Lime", "Fruit Punch", "Glacier Cherry", "Glacier Freeze", "Grape", "Green Apple",
-            "Lemon Lime", "Orange"],
+            "Lemon Lime", "Orange", "Strawberry Watermelon"],
         size: ["20oz", "28oz", "128oz", "6pk", "8pk", "12pk", "18pk"],
     },
     {
@@ -64,7 +64,7 @@ const pepsiCo = [
         brand: "Starry",
         variety: ["Original", "Zero"],
         flavor: ["None"],
-        size: ["20oz", "6pk-10oz", "6pk-16oz", "10pk", "12pk"]
+        size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "10pk", "12pk"]
     }
 ]
 
@@ -94,7 +94,7 @@ const keurigDrPepper = [
         variety: ["Original"],
         flavor: ["Brasilia Blueberry", "Kula Watermelon", "Molokai Coconut", "Puna Coconut Pineapple", "Raspberry Lemon Lime",
             "Zambia Bing Cherry"],
-        size: ["16oz", "4pk"]
+        size: ["16oz", "6pk"]
     },
     {
         brand: "Big Red",
@@ -124,7 +124,7 @@ const keurigDrPepper = [
         brand: "Diet Rite",
         variety: ["Original"],
         flavor: ["None"],
-        size: ["12pk"]
+        size: ["2LT", "12pk"]
     },
     {
         brand: "Dr. Pepper",
@@ -154,7 +154,7 @@ const keurigDrPepper = [
         brand: "Schweppes",
         variety: ["Original"],
         flavor: ["Ginger Ale"],
-        size: ["6pk-10oz", "6pk-16oz", "12pk"]
+        size: ["2LT", "6pk-10oz", "6pk-16oz", "12pk"]
     },
     {
         brand: "Squirt",
@@ -169,9 +169,15 @@ const keurigDrPepper = [
         size: ["16oz", "6pk", "12pk"]
     },
     {
+        brand: "Sundrop",
+        variety: ["Original", "Zero"],
+        flavor: ["None", "Cherry"],
+        size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "12pk"]
+    },
+    {
         brand: "Sunkist",
         variety: ["Original", "Zero"],
-        flavor: ["Berry Lemonade", "Cherry Limeade", "Fruit Punch", "Orange", "Peach", "Strawberry",
+        flavor: ["Berry Lemonade", "Cherry Limeade", "Fruit Punch", "Orange", "Peach", "Strawberry", "Strawberry Lemonade",
             "Strawberry Orange", "Watermelon Lemonade"],
         size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "8pk", "10pk", "12pk", "24pk"]
     },
@@ -185,7 +191,7 @@ const keurigDrPepper = [
         brand: "Vernors",
         variety: ["Original"],
         flavor: ["Ginger Ale"],
-        size: ["12pk"]
+        size: ["2LT", "12pk"]
     }
 ];
 
@@ -204,12 +210,6 @@ const buffaloRock = [
         size: ["20oz", "2LT", "6pk-16oz", "8pk", "12pk"]
     },
     {
-        brand: "Sundrop",
-        variety: ["Original", "Zero"],
-        flavor: ["None"],
-        size: ["20oz", "2LT", "6pk-10oz", "6pk-16oz", "12pk"]
-    },
-    {
         brand: "Sunfresh",
         variety: ["Original"],
         flavor: ["None"],
@@ -222,10 +222,10 @@ const celsius = [
     {
         brand: "Celsius Live Fit",
         variety: ["Original", "Variety Pack", "Fizz Free Variety Pack", "Space Variety Pack", "Vibe Variety Pack"],
-        flavor: ["None", "Arctic Vibe", "Astro Vibe", "Blue Razz Lemonade", "Cosmic Vibe", "Cola", "Fantasy Vibe", "Fuji Apple Pear",
+        flavor: ["None", "Arctic Vibe", "Astro Vibe", "Blue Razz Lemonade", "Cosmic Vibe", "Cherry Cola", "Cola", "Fantasy Vibe", "Fuji Apple Pear",
             "Galaxy Vibe", "Grape Rush", "Green Apple Cherry", "Kiwi Guava", "Lemon Lime", "Mango Passionfruit", "Oasis Vibe",
-            "Orange", "Orangecicle", "Peach Mango", "Peach Vibe", "Raspberry Acai", "Raspberry Peach", "Strawberry Guava",
-            "Strawberry Lemonade", "Tropical Vibe", "Watermelon", "Watermelon Lemon"],
+            "Orange", "Orangecicle", "Peach Mango", "Peach Vibe", "Raspberry Acai", "Raspberry Peach", "Strawberry Guava", "Strawberry Kiwi",
+            "Strawberry Lemonade", "Tropical Vibe", "Watermelon", "Watermelon Lemonade"],
         size: ["12oz", "4pk", "12pk"]
     },
     {
@@ -251,8 +251,10 @@ const lipton = [
     },
     {
         brand: "Pure Leaf",
-        variety: ["Original", "Zero"],
+        variety: ["Original", "Unsweetened", "Zero"],
         flavor: ["Extra Sweet", "Green Tea", "Lemon", "Raspberry", "Sweet Tea"],
-        size: ["6pk", "12pk"]
+        size: ["20oz", "6pk", "12pk"]
     }
 ];
+
+export { buffaloRock, celsius, keurigDrPepper, lipton, pepsiCo };

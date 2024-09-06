@@ -1,3 +1,4 @@
+import { buffaloRock, celsius, keurigDrPepper, lipton, pepsiCo } from './brands.js';
 const inputForm = document.querySelector("#inputForm");
 const inputs = {
     companyField: inputForm.elements.parentCompany,
@@ -32,7 +33,9 @@ const eventListeners = [
         createInputFields(inputs.companyField.value);
     }),
     inputs.resetBtn.addEventListener("click", () => {
-        resetList();
+        // resetList();
+        location.reload();
+        return false
     })
 ];
 
